@@ -27,10 +27,9 @@ class Eventos():
     def resizeTablaCli(self):
         try:
             header = var.ui.tabCliente.horizontalHeader()
-            for i in range(4):
+            for i in range(5):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
-                if i == 2:
+                if i == 0 or i == 3:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print('Error al redimensionar la tabla ', error)
-

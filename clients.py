@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from ventana import *
 import var
 
@@ -5,6 +7,7 @@ import var
 class Clientes():
     def validarDNI():
         try:
+            escribir = False    #para guardarCli
             dni = var.ui.txtdni.text()  # convertir letra en mayuscula
             var.ui.txtdni.setText(dni.upper())
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'  # letras dni
@@ -19,15 +22,19 @@ class Clientes():
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
                     var.ui.lblvalidodni.setStyleSheet('QLabel {color:green;}')
                     var.ui.lblvalidodni.setText('V')
+                    escribir = True
                 else:
                     var.ui.lblvalidodni.setStyleSheet('QLabel {color:red;}')
                     var.ui.lblvalidodni.setText('X')
                     var.ui.txtdni.setStyleSheet('background-color: rgb(255,0,0)')
+                    escribir = False
             else:
                 var.ui.lblvalidodni.setStyleSheet('QLabel {color:red;}')
                 var.ui.lblvalidodni.setText('X')
                 var.ui.txtdni.setStyleSheet('background-color: rgb(255,0,0)')
+                escribir = False
 
+            return escribir
         except Exception as error:
             print('Error en modulo valor dni. ', error)
 
@@ -126,19 +133,51 @@ class Clientes():
 
     def guardaCli(self):
         try:
-            #Preparamos el registro
-            newCli = []
-            client = [var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
-            for i in client:
-                newCli.append(i.text())
-            # cargamos en la tabla
-            row = 0
-            column = 0
-            var.ui.tabCliente.insertRow(row)
-            for campo in newCli:
-                cell = QtWidgets.QTableWidgetItem(campo)
-                var.ui.tabCliente.setItem(row, column, cell)
-                column += 1
+            if Clientes.validarDNI() == True:
+                #Preparamos el registro
+                newCli = []      #para la BD
+                tabCli = []      #para la tableView
+                client = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
+                #código para cargar la tabla
+
+                for i in client:
+                    tabCli.append(i.text())
+                row = 0
+                column = 0
+                var.ui.tabCliente.insertRow(row)
+                for campo in tabCli:
+                    cell = QtWidgets.QTableWidgetItem(campo)
+                    var.ui.tabCliente.setItem(row, column, cell)
+                    column += 1
+                pagos = []
+                if var.ui.chkCargoCuenta.isChecked():
+                    pagos.append('Cargo cuenta')
+                if var.ui.chkTrans.isChecked:
+                    pagos.append('Transferencia')
+                if var.ui.chkEfectivo.isChecked():
+                    pagos.append('Efectivo')
+                if var.ui.chkTarjeta.isChecked():
+                    pagos.append('Tarjeta')
+                pagos = set(pagos)      #evita duplicados
+                tabCli.append(', '.join(pagos))
+                #cargamos la tabla
+                row = 0
+                column = 0
+                var.ui.tabCliente.insertRow(row)
+                for campo in tabCli:
+                    cell = QtWidgets.QTableWidgetItem(str(campo))
+                    var.ui.tabCliente.setItem(row, column, cell)
+                    column += 1
+            else:
+                #print('DNI no válido')
+                msgBox = QMessageBox()
+                msgBox.setIcon(QtWidgets.QMessageBox.Warning)
+                msgBox.setMinimumSize(1024, 1024)   #no hace nada
+                msgBox.setWindowTitle('Aviso DNI')
+                msgBox.setText("DNI inválido")
+                msgBox.exec()
+
+            #código para cargar la DB
         except Exception as error:
             print('Error al guardar clientes ', error)
 
@@ -166,3 +205,17 @@ class Clientes():
 
         except Exception as error:
             print('Error al limpiar el formulario ', error)
+
+    def cargaCli(self):
+        try:
+            fila = var.ui.tabCliente.selectedItems()
+            datos = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
+            if fila:
+                row = [dato.text() for dato in fila]
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+                if i == 5:
+                    pass
+        except Exception as error:
+            print('Error al cargar datos de un cliente ', error)
+
