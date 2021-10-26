@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 
+import conexion
 from ventana import *
 import var
 
@@ -135,20 +136,23 @@ class Clientes():
         try:
             if Clientes.validarDNI() == True:
                 #Preparamos el registro
-                newCli = []      #para la BD
+                newCli = []
+                cliente = [var.ui.txtdni, var.ui.txtAlta, var.ui.txtApe, var.ui.txtNome, var.ui.txtDir ]      #para la BD
                 tabCli = []      #para la tableView
                 client = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
                 #código para cargar la tabla
-
+                for i in cliente:
+                    newCli.append(i.text())
                 for i in client:
                     tabCli.append(i.text())
+                newCli.append(var.ui.cmbProv.currentText)
+                newCli.append(var.ui.cmbMuni.currentText)
+                if var.ui.rbtHome.isChecked:
+                    newCli.append("Hombre")
+                elif var.ui.rbtMujer.isChecked:
+                    newCli.append("Mujer")
                 row = 0
                 column = 0
-                var.ui.tabCliente.insertRow(row)
-                for campo in tabCli:
-                    cell = QtWidgets.QTableWidgetItem(campo)
-                    var.ui.tabCliente.setItem(row, column, cell)
-                    column += 1
                 pagos = []
                 if var.ui.chkCargoCuenta.isChecked():
                     pagos.append('Cargo cuenta')
@@ -160,6 +164,7 @@ class Clientes():
                     pagos.append('Tarjeta')
                 pagos = set(pagos)      #evita duplicados
                 tabCli.append(', '.join(pagos))
+                newCli.append(', '.join(pagos))
                 #cargamos la tabla
                 row = 0
                 column = 0
@@ -168,6 +173,8 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(str(campo))
                     var.ui.tabCliente.setItem(row, column, cell)
                     column += 1
+                conexion.Conexion.altaCli(newCli)
+                print(newCli)
             else:
                 #print('DNI no válido')
                 msgBox = QMessageBox()

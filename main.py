@@ -1,6 +1,7 @@
 import PyQt5.uic.uiparser
 
 import clients
+import conexion
 from aviso import *
 from ventana import *
 from windowCal import *
@@ -77,11 +78,10 @@ class Main(QtWidgets.QMainWindow):
         events.Eventos.resizeTablaCli(self)
         var.ui.tabCliente.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabCliente.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        # header = var.ui.tabCliente.horizontalHeader()
-        # for i in range(4):
-        #     header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
-        #     if i == 2:
-        #         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        '''
+        Base de datos
+        '''
+        conexion.Conexion.db_connect(var.filedb)
 
 
 if __name__ == '__main__':
