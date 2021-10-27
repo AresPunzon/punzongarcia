@@ -560,7 +560,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         <string>Provincia:</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnLimpiaFormCli">
+      <widget class="QPushButton" name="btnLimpiaForm">
        <property name="geometry">
         <rect>
          <x>330</x>
@@ -710,11 +710,11 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

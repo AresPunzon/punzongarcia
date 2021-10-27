@@ -85,11 +85,11 @@ class Clientes():
         except Exception as error:
             print('Error en el módulo cargar municipio, ', error)
 
-    def selMuni(muni):
-        try:
-            print('Has seleccionado el municipio de ', muni)
-        except Exception as error:
-            print('Error en el módulo seleccionar municipio, ', error)
+    # def selMuni(muni):
+    #     try:
+    #         print('Has seleccionado el municipio de ', muni)
+    #     except Exception as error:
+    #         print('Error en el módulo seleccionar municipio, ', error)
 
     def cargarFecha(qDate):
         try:

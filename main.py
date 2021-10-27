@@ -50,13 +50,13 @@ class Main(QtWidgets.QMainWindow):
         #var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)
-        var.ui.btnLimpiaFormCli.clicked.connect(clients.Clientes.limpiarForm)
+        var.ui.btnLimpiaForm.clicked.connect(clients.Clientes.limpiarForm)
         '''
         Eventos de la barra de menús
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salida)
         '''
-        Eventos caja de tecxto
+        Eventos caja de texto
         '''
         var.ui.txtdni.editingFinished.connect(clients.Clientes.validarDNI)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayuscNome)
@@ -68,7 +68,7 @@ class Main(QtWidgets.QMainWindow):
         clients.Clientes.cargaProv(self)
         #var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         clients.Clientes.cargaMuni(self)
-        var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
+        #var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
         '''
         Eventos QTwidget
         '''
