@@ -1,8 +1,6 @@
 from PyQt5 import QtSql, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
-
-
 class Conexion:
     def db_connect(filedb):
         try:
@@ -50,29 +48,25 @@ class Conexion:
     #
     #     except Exception as error:
     #         print ('Problemas alta clientes', error)
-
     def altaCli(newCli):
         try:
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion, provincia, municipio,'
-                          'sexo, pagos) VALUES (?,?,?,?,?,?,?,?,?)')
-            query.addBindValue(str(newCli[0]))
-            query.addBindValue(str(newCli[1]))
-            query.addBindValue(str(newCli[2]))
-            query.addBindValue(str(newCli[3]))
-            query.addBindValue(str(newCli[4]))
-            query.addBindValue(str(newCli[5]))
-            query.addBindValue(str(newCli[6]))
-            query.addBindValue(str(newCli[7]))
-            query.addBindValue(str(newCli[8]))
+                          'sexo, pagos) VALUES (:dni, :alta, :apellidos, :nombre, :direccion, :provincia, :municipio,'
+                          ':sexo, :pagos)')
 
+            query.bindValue(':dni', str(newCli[0]))
+            query.bindValue(':alta', str(newCli[1]))
+            query.bindValue(':apellidos', str(newCli[2]))
+            query.bindValue(':nombre', str(newCli[3]))
+            query.bindValue(':direccion', str(newCli[4]))
+            query.bindValue(':provincia', str(newCli[5]))
+            query.bindValue(':municipio', str(newCli[6]))
+            query.bindValue(':sexo', str(newCli[7]))
+            query.bindValue(':pagos', str(newCli[8]))
             print(newCli)
             if query.exec_():
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
-                msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText('Cliente dado de Alta')
-                msg.exec()
+                print('alta cliente')
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')

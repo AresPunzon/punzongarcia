@@ -1,12 +1,9 @@
 import PyQt5.uic.uiparser
 
-import clients
-import conexion
 from aviso import *
 from ventana import *
 from windowCal import *
-import sys, var
-import events
+import sys, var, events, conexion, clients
 from datetime import *
 
 class DialogCalendar(QtWidgets.QDialog):

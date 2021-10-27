@@ -23,8 +23,8 @@
    <widget class="QLabel" name="clientes">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>9</y>
+      <x>330</x>
+      <y>0</y>
       <width>211</width>
       <height>51</height>
      </rect>
@@ -48,10 +48,10 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
    <widget class="QTableWidget" name="tabCliente">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>110</x>
       <y>390</y>
-      <width>600</width>
-      <height>200</height>
+      <width>691</width>
+      <height>211</height>
      </rect>
     </property>
     <column>
@@ -83,10 +83,10 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
    <widget class="QTabWidget" name="tabPrograma">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>70</y>
-      <width>691</width>
-      <height>301</height>
+      <x>100</x>
+      <y>40</y>
+      <width>721</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -99,27 +99,14 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
      <widget class="Line" name="line">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>250</y>
+        <x>20</x>
+        <y>270</y>
         <width>651</width>
         <height>16</height>
        </rect>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnGrabaCli">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>230</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Guardar</string>
       </property>
      </widget>
      <widget class="QGroupBox" name="groupBox">
@@ -591,23 +578,10 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="btnsalir">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>230</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Salir</string>
-      </property>
-     </widget>
      <widget class="Line" name="line_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>20</x>
         <y>0</y>
         <width>651</width>
         <height>16</height>
@@ -616,6 +590,46 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>240</y>
+        <width>320</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="btnGrabaCli">
+         <property name="text">
+          <string>Guardar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnMod">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBaja">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnsalir">
+         <property name="text">
+          <string>Salir</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -667,7 +681,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
    </property>
    <widget class="QMenu" name="menuarchivo">
     <property name="title">
-     <string>archivo</string>
+     <string>Archivo</string>
     </property>
     <addaction name="actionSalir"/>
    </widget>
@@ -696,11 +710,11 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>
