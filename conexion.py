@@ -36,7 +36,7 @@ class Conexion:
             query.bindValue(':sexo', str(newCli[7]))
             query.bindValue(':pago', str(newCli[8]))
 
-            if query.exec_:
+            if query.exec_():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
