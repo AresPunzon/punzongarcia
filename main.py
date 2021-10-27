@@ -49,8 +49,8 @@ class Main(QtWidgets.QMainWindow):
         Eventos de botón
         '''
         var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
-        var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
-        var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
+        #var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
+        #var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)
         var.ui.btnLimpiaFormCli.clicked.connect(clients.Clientes.limpiarForm)
@@ -69,7 +69,7 @@ class Main(QtWidgets.QMainWindow):
         Eventos de comboBox
         '''
         clients.Clientes.cargaProv(self)
-        var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+        #var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         clients.Clientes.cargaMuni(self)
         var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
         '''

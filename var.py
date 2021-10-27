@@ -9,4 +9,4 @@ global dlgCalendar
 '''
 Otras variables
 '''
-filedb = 'bddb.sqlite'
+filedb = 'pepe.sqlite'
