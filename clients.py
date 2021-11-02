@@ -205,6 +205,7 @@ class Clientes():
         try:
             fila = var.ui.tabCliente.selectedItems()
             datos = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
+
             if fila:
                 row = [dato.text() for dato in fila]
             print(row)
@@ -218,5 +219,15 @@ class Clientes():
                 var.ui.chkTrans.setChecked(True)
             if 'Cargo' in row[4]:
                 var.ui.chkCargoCuenta.setChecked(True)
+
+            ''' Intentar pillar el resto de los datos '''
+            query = QtSql.QSqlQuery()
+            query.prepare("select direccion, provincia, municipio, sexo from clientes "
+                          "where dni = :dni")
+            query.bindValue (":dni", dni)
+            print(dni)
+            if query.exec_():
+
+
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)

@@ -1,5 +1,6 @@
 from PyQt5 import QtSql, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+import var
 
 
 class Conexion:
@@ -51,3 +52,26 @@ class Conexion:
 
         except Exception as error:
             print ('Problemas alta clientes', error)
+
+    def cargarTabCli():
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare("select dni, apellidos, nombre, alta, pago from clientes")
+            if query.exec_():
+                while query.next():
+                    dni = query.value(0)
+                    apellidos = query.value(1)
+                    nombre = query.value(2)
+                    alta = query.value(3)
+                    pago = query.value(4)
+                    var.ui.tabCliente.setRowCount(index+1)    #creamos la fila y cargamos datos
+                    var.ui.tabCliente.setItem(index,0,QtWidgets.QTableWidgetItem(dni))
+                    var.ui.tabCliente.setItem(index,1,QtWidgets.QTableWidgetItem(apellidos))
+                    var.ui.tabCliente.setItem(index,2,QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabCliente.setItem(index,3,QtWidgets.QTableWidgetItem(alta))
+                    var.ui.tabCliente.setItem(index,4,QtWidgets.QTableWidgetItem(pago))
+                    index += 1
+
+        except Exception as error:
+            print('Problemas en mostrar listado clientes', error)

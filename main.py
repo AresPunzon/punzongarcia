@@ -90,5 +90,6 @@ if __name__ == '__main__':
     ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()
+    conexion.Conexion.cargarTabCli()
     ventana.show()
     sys.exit(app.exec())
