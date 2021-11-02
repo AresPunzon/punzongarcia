@@ -51,31 +51,3 @@ class Conexion:
 
         except Exception as error:
             print ('Problemas alta clientes', error)
-
-    # def altaCli(newCli):
-    #     try:
-    #         query = QtSql.QSqlQuery()
-    #         query.prepare('INSERT INTO clientes (dni, alta, apellidos, nombre, direccion, provincia, municipio,'
-    #                       'sexo, pagos) VALUES(:dni, :alta, :apellidos, :nombre, :direccion, :provincia, :municipio,'
-    #                       ':sexo, :pagos)')
-    #
-    #         query.bindValue(':dni', str(newCli[0]))
-    #         query.bindValue(':alta', str(newCli[1]))
-    #         query.bindValue(':apellidos', str(newCli[2]))
-    #         query.bindValue(':nombre', str(newCli[3]))
-    #         query.bindValue(':direccion', str(newCli[4]))
-    #         query.bindValue(':provincia', str(newCli[5]))
-    #         query.bindValue(':municipio', str(newCli[6]))
-    #         query.bindValue(':sexo', str(newCli[7]))
-    #         query.bindValue(':pagos', str(newCli[8]))
-    #         print(newCli)
-    #         if query.exec_():
-    #             print('alta cliente')
-    #         else:
-    #             msg = QtWidgets.QMessageBox()
-    #             msg.setWindowTitle('Aviso')
-    #             msg.setIcon(QtWidgets.QMessageBox.Warning)
-    #             msg.setText(query.lastError().text())
-    #             msg.exec()
-    #     except Exception as error:
-    #         print('Problemas en altaCliente', error)

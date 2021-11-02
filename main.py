@@ -84,6 +84,10 @@ class Main(QtWidgets.QMainWindow):
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     ventana = Main()
+    desktop = QtWidgets.QApplication.desktop()
+    x = (desktop.width() - ventana.width())
+    y = (desktop.height() - ventana.height())
+    ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()
     ventana.show()
