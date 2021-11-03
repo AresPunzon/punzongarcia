@@ -220,14 +220,38 @@ class Clientes():
             if 'Cargo' in row[4]:
                 var.ui.chkCargoCuenta.setChecked(True)
 
-            ''' Intentar pillar el resto de los datos '''
-            query = QtSql.QSqlQuery()
-            query.prepare("select direccion, provincia, municipio, sexo from clientes "
-                          "where dni = :dni")
-            query.bindValue (":dni", dni)
-            print(dni)
-            if query.exec_():
-
+            registro = conexion.Conexion.oneClie(row[0])
+            print(registro)
+            var.ui.txtDir.setText(str(registro[0]))
+            var.ui.cmbProv.setCurrentText(str(registro[1]))
+            var.ui.cmbMuni.setCurrentText(str(registro[2]))
+            if str(registro[3]) == 'Hombre':
+                var.ui.rbtHome.setChecked(True)
+            elif str(registro[3]) == 'Mujer':
+                var.ui.rbtMujer.setChecked(True)
 
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)
+
+    def bajaCli(self):
+        try:
+            dni = var.ui.txtdni.text()
+            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.cargarTabCli(self)
+        except Exception as error:
+            print('Error al eliminar un cliente ', error)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

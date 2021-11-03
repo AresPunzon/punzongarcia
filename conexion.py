@@ -53,11 +53,11 @@ class Conexion:
         except Exception as error:
             print ('Problemas alta clientes', error)
 
-    def cargarTabCli():
+    def cargarTabCli(self):
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare("select dni, apellidos, nombre, alta, pago from clientes")
+            query.prepare("select dni, apellidos, nombre, alta, pago from clientes order by apellidos")
             if query.exec_():
                 while query.next():
                     dni = query.value(0)
@@ -75,3 +75,44 @@ class Conexion:
 
         except Exception as error:
             print('Problemas en mostrar listado clientes', error)
+
+    def oneClie(dni):
+        try:
+            record = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select direccion, provincia, municipio, sexo from clientes '
+                          'where dni = :dni')
+            query.bindValue(':dni', dni)
+            if query.exec_():
+                while query.next():
+                    for i in range(4):
+                        record.append(query.value(i))
+            return record
+        except Exception as error:
+            print('Problemas al mostrar datos de un cliente', error)
+
+    def bajaCli(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from clientes where dni = :dni')
+            query.bindValue(':dni', str(dni))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Cliente dado de baja')
+                msg.exec()
+
+        except Exception as error:
+            print('Error baja cliente en conexión', error)
+
+
+
+
+
+
+
+
+
+
+

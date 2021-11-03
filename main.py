@@ -51,6 +51,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)
         var.ui.btnLimpiaForm.clicked.connect(clients.Clientes.limpiarForm)
+        var.ui.btnBaja.clicked.connect(clients.Clientes.bajaCli)
         '''
         Eventos de la barra de menús
         '''
@@ -79,6 +80,7 @@ class Main(QtWidgets.QMainWindow):
         Base de datos
         '''
         conexion.Conexion.db_connect(var.filedb)
+        conexion.Conexion.cargarTabCli(self)
 
 
 if __name__ == '__main__':
@@ -90,6 +92,5 @@ if __name__ == '__main__':
     ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()
-    conexion.Conexion.cargarTabCli()
     ventana.show()
     sys.exit(app.exec())
