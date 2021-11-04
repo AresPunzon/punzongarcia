@@ -63,13 +63,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayuscNome)
         var.ui.txtApe.editingFinished.connect(clients.Clientes.mayuscApe)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayuscDir)
-        '''
-        Eventos de comboBox
-        '''
-        clients.Clientes.cargaProv(self)
-        #var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
-        clients.Clientes.cargaMuni(self)
-        #var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
+
         '''
         Eventos QTwidget
         '''
@@ -81,6 +75,13 @@ class Main(QtWidgets.QMainWindow):
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTabCli(self)
+        '''
+        Eventos de comboBox
+        '''
+        clients.Clientes.cargaProv(self)
+        # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
+        clients.Clientes.cargaMuni(self)
+        # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
 
 
 if __name__ == '__main__':

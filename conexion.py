@@ -106,7 +106,33 @@ class Conexion:
         except Exception as error:
             print('Error baja cliente en conexión', error)
 
+    def cargaProvCon(self):
+        try:
+            provId = []
+            provNom = []
+            prov = {}
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from provincias')
+            if query.exec_():
+                while query.next():
+                    provId.append(query.value(0))
+                    provNom.append(query.value(1))
+                prov = dict(zip(provId, provNom))
+            return prov
+        except Exception as error:
+            print('Error en la selección de provincia', error)
 
+    def cargaMuniCon(self):
+        try:
+            mun = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select municipio from municipios where provincia_id = ')
+            if query.exec_():
+                while query.next():
+                    mun.append(query.value(0))
+            return mun
+        except Exception as error:
+            print('Error en la selección de municipio', error)
 
 
 

@@ -61,11 +61,24 @@ class Clientes():
     #     except Exception as error:
     #         print('Error al seleccionar forma de pago ', error)
 
+
+    '''
     def cargaProv(self):
         try:
             var.ui.cmbProv.clear()
             prov = ["", "A Coruña", "Lugo", "Ourense", "Pontevedra"]
             for i in prov:
+                var.ui.cmbProv.addItem(i)
+        except Exception as error:
+            print('Error en el módulo cargar provincia, ', error)
+    '''
+
+    def cargaProv(self):
+        try:
+            var.ui.cmbProv.clear()
+            prov = conexion.Conexion.cargaProvCon(self)
+            nom = prov.values()
+            for i in nom:
                 var.ui.cmbProv.addItem(i)
         except Exception as error:
             print('Error en el módulo cargar provincia, ', error)
@@ -75,12 +88,22 @@ class Clientes():
     #         print('Has seleccionado la provincia de ', prov)
     #     except Exception as error:
     #         print('Error en el módulo seleccionar provincia, ', error)
-
+    '''
     def cargaMuni(self):
         try:
             var.ui.cmbMuni.clear()
             muni = ["", "a"]
             for i in muni:
+                var.ui.cmbMuni.addItem(i)
+        except Exception as error:
+            print('Error en el módulo cargar municipio, ', error)
+    '''
+
+    def cargaMuni(self):
+        try:
+            var.ui.cmbMuni.clear()
+            mun = conexion.Conexion.cargaMuniCon(self)
+            for i in mun:
                 var.ui.cmbMuni.addItem(i)
         except Exception as error:
             print('Error en el módulo cargar municipio, ', error)
@@ -209,7 +232,7 @@ class Clientes():
             if fila:
                 row = [dato.text() for dato in fila]
             print(row)
-            for i, dato in enumerate(datos):    #cargamos los datos en las cajas de texto
+            for i, dato in enumerate(datos):  # cargamos los datos en las cajas de texto
                 dato.setText(row[i])
             if 'Efectivo' in row[4]:
                 var.ui.chkEfectivo.setChecked(True)
@@ -240,18 +263,3 @@ class Clientes():
             conexion.Conexion.cargarTabCli(self)
         except Exception as error:
             print('Error al eliminar un cliente ', error)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
