@@ -88,16 +88,16 @@ class Clientes():
     #         print('Has seleccionado la provincia de ', prov)
     #     except Exception as error:
     #         print('Error en el módulo seleccionar provincia, ', error)
-    '''
-    def cargaMuni(self):
-        try:
-            var.ui.cmbMuni.clear()
-            muni = ["", "a"]
-            for i in muni:
-                var.ui.cmbMuni.addItem(i)
-        except Exception as error:
-            print('Error en el módulo cargar municipio, ', error)
-    '''
+
+    # def cargaMuni(self):
+    #     try:
+    #         var.ui.cmbMuni.clear()
+    #         muni = ["", "a"]
+    #         for i in muni:
+    #             var.ui.cmbMuni.addItem(i)
+    #     except Exception as error:
+    #         print('Error en el módulo cargar municipio, ', error)
+
 
     def cargaMuni(self):
         try:
@@ -256,6 +256,36 @@ class Clientes():
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)
 
+    def modifCli(self):
+        try:
+            modcliente = []
+            cliente = [var.ui.txtdni, var.ui.txtAlta, var.ui.txtApe, var.ui.txtNome, var.ui.txtDir]
+            for i in cliente:
+                modcliente.append(i.text())
+            modcliente.append(var.ui.cmbProv.currentText())
+            modcliente.append(var.ui.cmbMuni.currentText())
+            if var.ui.rbtHome.isChecked:
+                modcliente.append("Hombre")
+            elif var.ui.rbtMujer.isChecked:
+                modcliente.append("Mujer")
+            pagos = []
+            if var.ui.chkCargoCuenta.isChecked():
+                pagos.append('Cargo cuenta')
+            if var.ui.chkTrans.isChecked():
+                pagos.append('Transferencia')
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+            pagos = set(pagos)
+            modcliente.append(', '.join(pagos))
+
+            conexion.Conexion.modifCli(modcliente)
+            conexion.Conexion.cargarTabCli(self)
+
+        except Exception as error:
+            print('Error al modificar un cliente ', error)
+
     def bajaCli(self):
         try:
             dni = var.ui.txtdni.text()
@@ -263,3 +293,5 @@ class Clientes():
             conexion.Conexion.cargarTabCli(self)
         except Exception as error:
             print('Error al eliminar un cliente ', error)
+
+

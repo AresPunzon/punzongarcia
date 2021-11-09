@@ -1,10 +1,13 @@
+import locale
+
 import PyQt5.uic.uiparser
 
 from aviso import *
 from ventana import *
 from windowCal import *
-import sys, var, events, conexion, clients
+import sys, var, events, conexion, clients, locale
 from datetime import *
+locale.setlocale(locale.LC_ALL, 'es-ES')
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -52,6 +55,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)
         var.ui.btnLimpiaForm.clicked.connect(clients.Clientes.limpiarForm)
         var.ui.btnBaja.clicked.connect(clients.Clientes.bajaCli)
+        var.ui.btnMod.clicked.connect(clients.Clientes.modifCli)
         '''
         Eventos de la barra de menús
         '''
@@ -82,6 +86,12 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         clients.Clientes.cargaMuni(self)
         # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
+        '''
+        barra de estado
+        '''
+        var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
+        day = datetime.now()
+        var.ui.lblFecha.setText(day.strftime('%A, %d del %B de %Y'))
 
 
 if __name__ == '__main__':
