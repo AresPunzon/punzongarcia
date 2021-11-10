@@ -39,6 +39,13 @@ class DialogAviso(QtWidgets.QDialog):
         var.dlgaviso.btnboxaviso.accepted.connect(self.accept)
         var.dlgaviso.btnboxaviso.rejected.connect(self.reject)
 
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        '''
+        ventana abrir explorador windows
+        '''
+        super(FileDialogAbrir, self).__init__()
+
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -60,6 +67,7 @@ class Main(QtWidgets.QMainWindow):
         Eventos de la barra de menús
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salida)
+        var.ui.actionAbrir.triggered.connect(events.Eventos.Abrir)
         '''
         Eventos caja de texto
         '''
@@ -84,7 +92,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         clients.Clientes.cargaProv(self)
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
-        clients.Clientes.cargaMuni(self)
+        var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMuni)
         # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
         '''
         barra de estado
@@ -103,5 +111,6 @@ if __name__ == '__main__':
     ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()
+    var.dlgabrir=FileDialogAbrir()
     ventana.show()
     sys.exit(app.exec())
