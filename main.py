@@ -68,6 +68,8 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salida)
         var.ui.actionAbrir.triggered.connect(events.Eventos.Abrir)
+        var.ui.actionCrear_backup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionRestaurar.triggered.connect(events.Eventos.Restaurar)
         '''
         Eventos caja de texto
         '''
@@ -100,7 +102,15 @@ class Main(QtWidgets.QMainWindow):
         var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
         day = datetime.now()
         var.ui.lblFecha.setText(day.strftime('%A, %d del %B de %Y'))
-
+        '''
+        Eventos menú herramientas
+        '''
+        var.ui.actionvarSalir.triggered.connect(events.Eventos.Salida)
+        var.ui.actionvarOpen.triggered.connect(events.Eventos.Abrir)
+        var.ui.actionvarBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.Restaurar)
+        var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
+        var.ui.actionvarAbrirImprimir
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
