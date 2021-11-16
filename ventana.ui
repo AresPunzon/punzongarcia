@@ -672,8 +672,8 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
    <widget class="QLabel" name="lblFecha">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>620</y>
+      <x>370</x>
+      <y>610</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -703,6 +703,11 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
      <string>Archivo</string>
     </property>
     <addaction name="actionAbrir"/>
+    <addaction name="separator"/>
+    <addaction name="actionImportar_datos"/>
+    <addaction name="actionExportar_datos"/>
+    <addaction name="separator"/>
+    <addaction name="actionImprimir"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
@@ -821,6 +826,21 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
    </property>
    <property name="text">
     <string>varAbrirImprimir</string>
+   </property>
+  </action>
+  <action name="actionImportar_datos">
+   <property name="text">
+    <string>Importar datos</string>
+   </property>
+  </action>
+  <action name="actionExportar_datos">
+   <property name="text">
+    <string>Exportar datos</string>
+   </property>
+  </action>
+  <action name="actionImprimir">
+   <property name="text">
+    <string>Imprimir</string>
    </property>
   </action>
  </widget>

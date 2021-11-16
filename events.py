@@ -6,9 +6,10 @@ import pathlib
 import shutil
 import sys, var, shutil
 import zipfile
+import xlrd
 
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QtPrintSupport
+from PyQt5 import QtPrintSupport
 
 import conexion
 from ventana import *
@@ -97,6 +98,20 @@ class Eventos():
         except Exception as error:
             print('Error al imprimir ', error)
 
+    def ImportarDatos(self):
+        try:
+            documento = xlrd.open_workbook("DATOSCLIENTES.xls")
+            clientes = documento.sheet_by_index(0)
+            filas_clientes = clientes.nrows
+            columnas_clientes = clientes.ncols
+            print("Filas: " + str(filas_clientes) + ". Columnas: " + str(columnas_clientes))
+
+            dirpro = os.getcwd()
+            print(dirpro)
+            option = QtWidgets.QFileDialog.Options()
+            filename = var.dlgabrir.getOpenFileName(None, 'Cargar datos desde Excel', "", '*.xls;;All ',options=option)
+        except Exception as error:
+            print('Error al cargar datos del excel ', error)
 
 
 

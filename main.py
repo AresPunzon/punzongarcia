@@ -111,6 +111,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.Restaurar)
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionvarAbrirImprimir
+        var.ui.actionImportar_datos.triggered.connect(events.Eventos.ImportarDatos)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
