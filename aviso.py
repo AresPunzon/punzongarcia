@@ -33,7 +33,7 @@ class Ui_aviso(object):
         self.label = QtWidgets.QLabel(aviso)
         self.label.setGeometry(QtCore.QRect(160, 60, 61, 71))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap(":/warningprefix/img/warning.png"))
+        self.label.setPixmap(QtGui.QPixmap("img/warning.png"))
         self.label.setObjectName("label")
 
         self.retranslateUi(aviso)
@@ -43,3 +43,4 @@ class Ui_aviso(object):
         _translate = QtCore.QCoreApplication.translate
         aviso.setWindowTitle(_translate("aviso", "Dialog"))
         self.lblaviso.setText(_translate("aviso", "DESEA SALIR?"))
+#import warning_rc

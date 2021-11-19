@@ -98,7 +98,6 @@ class Clientes():
     #     except Exception as error:
     #         print('Error en el módulo cargar municipio, ', error)
 
-
     def cargaMuni(self):
         try:
             var.ui.cmbMuni.clear()
@@ -176,6 +175,7 @@ class Clientes():
                 pagos = set(pagos)  # evita duplicados
                 tabCli.append(', '.join(pagos))
                 newCli.append(', '.join(pagos))
+                newCli.append(var.ui.spinEnvio.value())
                 # cargamos la tabla
                 row = 0
                 column = 0
@@ -220,6 +220,7 @@ class Clientes():
             var.ui.rbtHome.setChecked(False)
             var.ui.rbtMujer.setChecked(False)
             var.ui.rbtGroupSex.setExclusive(True)
+            var.ui.spinEnvio.setValue(0)
 
         except Exception as error:
             print('Error al limpiar el formulario ', error)
@@ -279,6 +280,7 @@ class Clientes():
                 pagos.append('Tarjeta')
             pagos = set(pagos)
             modcliente.append(', '.join(pagos))
+            modcliente.append(var.ui.spinEnvio.value())
 
             conexion.Conexion.modifCli(modcliente)
             conexion.Conexion.cargarTabCli(self)

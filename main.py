@@ -96,7 +96,7 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMuni)
         # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
-        '''
+        ''' 
         barra de estado
         '''
         var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
@@ -110,8 +110,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarBackup.triggered.connect(events.Eventos.Backup)
         var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.Restaurar)
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
-        var.ui.actionvarAbrirImprimir
         var.ui.actionImportar_datos.triggered.connect(events.Eventos.ImportarDatos)
+        var.ui.actionExportar_datos.triggered.connect(events.Eventos.ExportarDatos)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

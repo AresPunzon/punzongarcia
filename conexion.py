@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import xlwt as xlwt
 from PyQt5 import QtSql, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import var
@@ -10,23 +13,25 @@ class Conexion:
             db.setDatabaseName(filedb)
             if not db.open():
                 QtWidgets.QMessageBox.critical(None,
-                    "No se puede abrir la base de alta.\n Haz clic para continuar",
-                            QtWidgets.QMessageBox.Cancel)
+                                               "No se puede abrir la base de alta.\n Haz clic para continuar",
+                                               QtWidgets.QMessageBox.Cancel)
                 return False
             else:
                 print("Conexión establecida")
                 return True
         except Exception as error:
-            print ('Problemas en la conexión', error)
+            print('Problemas en la conexión', error)
 
     '''
     Módulos gestión DB clientes
     '''
+
     def altaCli(newCli):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into clientes (dni, alta, apellidos, nombre, direccion, provincia, municipio, sexo, pago)'
-                          'VALUES (:dni, :alta, :apellidos, :nombre, :direccion,:provincia, :municipio, :sexo, :pago)')
+            query.prepare(
+                'insert into clientes (dni, alta, apellidos, nombre, direccion, provincia, municipio, sexo, pago, envio)'
+                'VALUES (:dni, :alta, :apellidos, :nombre, :direccion,:provincia, :municipio, :sexo, :pago, :envio)')
             query.bindValue(':dni', str(newCli[0]))
             query.bindValue(':alta', str(newCli[1]))
             query.bindValue(':apellidos', str(newCli[2]))
@@ -36,6 +41,7 @@ class Conexion:
             query.bindValue(':municipio', str(newCli[6]))
             query.bindValue(':sexo', str(newCli[7]))
             query.bindValue(':pago', str(newCli[8]))
+            query.bindValue(':envio', str(newCli[9]))
 
             if query.exec_():
                 msg = QtWidgets.QMessageBox()
@@ -51,7 +57,7 @@ class Conexion:
                 msg.exec()
 
         except Exception as error:
-            print ('Problemas alta clientes', error)
+            print('Problemas alta clientes', error)
 
     def cargarTabCli(self):
         try:
@@ -65,12 +71,12 @@ class Conexion:
                     nombre = query.value(2)
                     alta = query.value(3)
                     pago = query.value(4)
-                    var.ui.tabCliente.setRowCount(index+1)    #creamos la fila y cargamos datos
-                    var.ui.tabCliente.setItem(index,0,QtWidgets.QTableWidgetItem(dni))
-                    var.ui.tabCliente.setItem(index,1,QtWidgets.QTableWidgetItem(apellidos))
-                    var.ui.tabCliente.setItem(index,2,QtWidgets.QTableWidgetItem(nombre))
-                    var.ui.tabCliente.setItem(index,3,QtWidgets.QTableWidgetItem(alta))
-                    var.ui.tabCliente.setItem(index,4,QtWidgets.QTableWidgetItem(pago))
+                    var.ui.tabCliente.setRowCount(index + 1)  # creamos la fila y cargamos datos
+                    var.ui.tabCliente.setItem(index, 0, QtWidgets.QTableWidgetItem(dni))
+                    var.ui.tabCliente.setItem(index, 1, QtWidgets.QTableWidgetItem(apellidos))
+                    var.ui.tabCliente.setItem(index, 2, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabCliente.setItem(index, 3, QtWidgets.QTableWidgetItem(alta))
+                    var.ui.tabCliente.setItem(index, 4, QtWidgets.QTableWidgetItem(pago))
                     index += 1
 
         except Exception as error:
@@ -150,7 +156,7 @@ class Conexion:
             query = QtSql.QSqlQuery()
             query.prepare('update clientes set alta = :alta, apellidos = :apellidos, '
                           'nombre = :nombre, direccion = : direccion, provincia = :provincia, '
-                          'municipio = :municipio, sexo = :sexo, pago = :pago '
+                          'municipio = :municipio, sexo = :sexo, pago = :pago, envio = :envio '
                           'where dni = :dni')
             query.bindValue(':dni', str(modcliente[0]))
             query.bindValue(':alta', str(modcliente[1]))
@@ -161,6 +167,7 @@ class Conexion:
             query.bindValue(':municipio', str(modcliente[6]))
             query.bindValue(':sexo', str(modcliente[7]))
             query.bindValue(':pago', str(modcliente[8]))
+            query.bindValue(':envio', str(modcliente[9]))
             if query.exec_():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
@@ -173,9 +180,38 @@ class Conexion:
         except Exception as error:
             print('Error en la modificación de clientes', error)
 
+    def exportExcel(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
+            var.copia = (str(fecha) + '_dataExport.xls')
+            option = QtWidgets.QFileDialog.Options()
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar datos', var.copia, '.xls',
+                                                                options=option)
+            wb = xlwt.Workbook()
+            # add_sheet is used to create sheet.
+            sheet1 = wb.add_sheet('Hoja 1')
 
+            # Cabeceras
+            sheet1.write(0, 0, 'DNI')
+            sheet1.write(0, 1, 'APELIDOS')
+            sheet1.write(0, 2, 'NOME')
+            sheet1.write(0, 3, 'DIRECCION')
+            sheet1.write(0, 4, 'PROVINCIA')
+            sheet1.write(0, 5, 'SEXO')
+            f = 1
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT *  FROM clientes')
+            if query.exec_():
+                while query.next():
+                    sheet1.write(f, 0, query.value(0))
+                    sheet1.write(f, 1, query.value(2))
+                    sheet1.write(f, 2, query.value(3))
+                    sheet1.write(f, 3, query.value(4))
+                    sheet1.write(f, 4, query.value(5))
+                    sheet1.write(f, 5, query.value(7))
+                    f += 1
+            wb.save(directorio)
 
-
-
-
-
+        except Exception as error:
+            print('Error en conexion para exportar excel ', error)
