@@ -70,6 +70,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionAbrir.triggered.connect(events.Eventos.Abrir)
         var.ui.actionCrear_backup.triggered.connect(events.Eventos.Backup)
         var.ui.actionRestaurar.triggered.connect(events.Eventos.Restaurar)
+        var.ui.actionImportar_datos.triggered.connect(events.Eventos.ImportarDatos)
+        var.ui.actionExportar_datos.triggered.connect(events.Eventos.ExportarDatos)
+        var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
         '''
         Eventos caja de texto
         '''
@@ -77,7 +80,6 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayuscNome)
         var.ui.txtApe.editingFinished.connect(clients.Clientes.mayuscApe)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayuscDir)
-
         '''
         Eventos QTwidget
         '''
@@ -114,9 +116,6 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarBackup.triggered.connect(events.Eventos.Backup)
         var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.Restaurar)
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
-        var.ui.actionImportar_datos.triggered.connect(events.Eventos.ImportarDatos)
-        var.ui.actionExportar_datos.triggered.connect(events.Eventos.ExportarDatos)
-        var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

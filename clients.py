@@ -8,36 +8,35 @@ import var
 class Clientes():
     def validarDNI():
         try:
-            escribir = False  # para guardarCli
-            dni = var.ui.txtdni.text()  # convertir letra en mayuscula
+            global dnivalido
+            dnivalido = False
+            dni = var.ui.txtdni.text()
             var.ui.txtdni.setText(dni.upper())
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'  # letras dni
-            dig_ext = 'XYZ'  # digito extranjero
+            dig_ext = 'XYZ'  # digito
             reemp_dig_ext = {'X': '0', 'Y': '1', 'Z': '2'}
             numeros = '1234567890'
+            dni = dni.upper()  # conver la letra mayúsculas
             if len(dni) == 9:
                 dig_control = dni[8]
                 dni = dni[:8]
                 if dni[0] in dig_ext:
                     dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
-                    var.ui.lblvalidodni.setStyleSheet('QLabel {color:green;}')
+                    var.ui.lblvalidodni.setStyleSheet('QLabel {color: green;}')
                     var.ui.lblvalidodni.setText('V')
-                    escribir = True
+                    var.ui.txtdni.setStyleSheet('background-color: white;')
+                    dnivalido = True
                 else:
-                    var.ui.lblvalidodni.setStyleSheet('QLabel {color:red;}')
+                    var.ui.lblvalidodni.setStyleSheet('QLabel {color: red;}')
                     var.ui.lblvalidodni.setText('X')
-                    var.ui.txtdni.setStyleSheet('background-color: rgb(255,0,0)')
-                    escribir = False
+                    var.ui.txtdni.setStyleSheet('background-color: pink;')
             else:
-                var.ui.lblvalidodni.setStyleSheet('QLabel {color:red;}')
+                var.ui.lblvalidodni.setStyleSheet('QLabel {color: red;}')
                 var.ui.lblvalidodni.setText('X')
-                var.ui.txtdni.setStyleSheet('background-color: rgb(255,0,0)')
-                escribir = False
-
-            return escribir
+                var.ui.txtdni.setStyleSheet('background-color: pink;')
         except Exception as error:
-            print('Error en modulo valor dni. ', error)
+            print('Error en módulo validar DNI', error)
 
     # def setSexo(self):
     #     try:
@@ -174,8 +173,6 @@ class Clientes():
                     newCli.append("Hombre")
                 elif var.ui.rbtMujer.isChecked:
                     newCli.append("Mujer")
-                row = 0
-                column = 0
                 pagos = []
                 if var.ui.chkCargoCuenta.isChecked():
                     pagos.append('Cargo cuenta')
@@ -207,8 +204,6 @@ class Clientes():
                 msgBox.setWindowTitle('Aviso DNI')
                 msgBox.setText("DNI inválido")
                 msgBox.exec()
-
-            # código para cargar la DB
         except Exception as error:
             print('Error al guardar clientes ', error)
 
@@ -219,8 +214,8 @@ class Clientes():
             var.ui.txtNome.setText("")
             var.ui.txtDir.setText("")
             var.ui.txtAlta.setText("")
-            var.ui.cmbProv.clear
-            var.ui.cmbMuni.clear
+            #var.ui.cmbProv.clear
+            #var.ui.cmbMuni.clear
             var.ui.chkTrans.setChecked(False)
             var.ui.chkCargoCuenta.setChecked(False)
             var.ui.chkTarjeta.setChecked(False)

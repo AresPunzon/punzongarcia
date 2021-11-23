@@ -222,7 +222,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -293,7 +293,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>380</x>
@@ -342,7 +342,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -424,7 +424,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -459,7 +459,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -517,7 +517,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -601,6 +601,12 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </item>
         <item>
          <widget class="QLabel" name="lblEnvio">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>Recogida cliente</string>
           </property>
