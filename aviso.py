@@ -14,8 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_aviso(object):
     def setupUi(self, aviso):
         aviso.setObjectName("aviso")
-        aviso.setWindowModality(QtCore.Qt.WindowModal)
+        aviso.setWindowModality(QtCore.Qt.NonModal)
         aviso.resize(400, 300)
+        aviso.setModal(True)
         self.btnboxaviso = QtWidgets.QDialogButtonBox(aviso)
         self.btnboxaviso.setGeometry(QtCore.QRect(110, 210, 156, 23))
         self.btnboxaviso.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
@@ -43,4 +44,3 @@ class Ui_aviso(object):
         _translate = QtCore.QCoreApplication.translate
         aviso.setWindowTitle(_translate("aviso", "Dialog"))
         self.lblaviso.setText(_translate("aviso", "DESEA SALIR?"))
-#import warning_rc

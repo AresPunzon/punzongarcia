@@ -86,12 +86,12 @@ class Conexion:
         try:
             record = []
             query = QtSql.QSqlQuery()
-            query.prepare('select direccion, provincia, municipio, sexo from clientes '
+            query.prepare('select direccion, provincia, municipio, sexo, envio from clientes '
                           'where dni = :dni')
             query.bindValue(':dni', dni)
             if query.exec_():
                 while query.next():
-                    for i in range(4):
+                    for i in range(5):
                         record.append(query.value(i))
             return record
         except Exception as error:
@@ -155,7 +155,7 @@ class Conexion:
             print(modcliente)
             query = QtSql.QSqlQuery()
             query.prepare('update clientes set alta = :alta, apellidos = :apellidos, '
-                          'nombre = :nombre, direccion = : direccion, provincia = :provincia, '
+                          'nombre = :nombre, direccion = :direccion, provincia = :provincia, '
                           'municipio = :municipio, sexo = :sexo, pago = :pago, envio = :envio '
                           'where dni = :dni')
             query.bindValue(':dni', str(modcliente[0]))
@@ -175,7 +175,11 @@ class Conexion:
                 msg.setText('Datos modificados de cliente')
                 msg.exec()
             else:
-                print('a')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
 
         except Exception as error:
             print('Error en la modificación de clientes', error)

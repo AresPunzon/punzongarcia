@@ -142,6 +142,19 @@ class Clientes():
         except Exception as error:
             print('Error al escribir la dirección ', error)
 
+    def envio(self):
+        try:
+            if var.ui.spinEnvio.value() == 0:
+                var.ui.lblEnvio.setText('Recogida por cliente')
+            elif var.ui.spinEnvio.value() == 1:
+                var.ui.lblEnvio.setText('Envío Nacional Paquetería Express Urgente')
+            elif var.ui.spinEnvio.value() == 2:
+                var.ui.lblEnvio.setText('Envío Nacional Paquetería Normal')
+            elif var.ui.spinEnvio.value() == 3:
+                var.ui.lblEnvio.setText('Envío Interncional')
+        except Exception as error:
+            print('Error en modulo envío', error)
+
     def guardaCli(self):
         try:
             if Clientes.validarDNI() == True:
@@ -253,6 +266,7 @@ class Clientes():
                 var.ui.rbtHome.setChecked(True)
             elif str(registro[3]) == 'Mujer':
                 var.ui.rbtMujer.setChecked(True)
+            var.ui.spinEnvio.setValue(registro[4])
 
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)
@@ -281,7 +295,6 @@ class Clientes():
             pagos = set(pagos)
             modcliente.append(', '.join(pagos))
             modcliente.append(var.ui.spinEnvio.value())
-
             conexion.Conexion.modifCli(modcliente)
             conexion.Conexion.cargarTabCli(self)
 

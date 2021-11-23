@@ -96,6 +96,10 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMuni)
         # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
+        '''
+        spinbox
+        '''
+        var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
         ''' 
         barra de estado
         '''
@@ -112,13 +116,14 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionImportar_datos.triggered.connect(events.Eventos.ImportarDatos)
         var.ui.actionExportar_datos.triggered.connect(events.Eventos.ExportarDatos)
+        var.ui.actionImprimir.triggered.connect(events.Eventos.Imprimir)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     ventana = Main()
     desktop = QtWidgets.QApplication.desktop()
-    x = (desktop.width() - ventana.width())
-    y = (desktop.height() - ventana.height())
+    x = (desktop.width() - ventana.width()) // 2
+    y = (desktop.height() - ventana.height()) // 2
     ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()

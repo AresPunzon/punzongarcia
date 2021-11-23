@@ -95,7 +95,7 @@ class Eventos():
 
     def Imprimir(self):
         try:
-            printDialog = QtWidgets.QFileDialog()
+            printDialog = QtPrintSupport.QPrintDialog()
             if printDialog.exec_():
                 printDialog.show()
         except Exception as error:
@@ -147,6 +147,7 @@ class Eventos():
                             query.bindValue(':direccion', c4)
                             query.bindValue(':provincia', c5)
                             query.bindValue(':sexo', c6)
+                            query.exec()
                         else:
                             query.prepare(
                                 'insert into clientes (dni, apellidos, nombre, direccion, provincia, sexo)'
@@ -157,6 +158,8 @@ class Eventos():
                             query.bindValue(':direccion', c4)
                             query.bindValue(':provincia', c5)
                             query.bindValue(':sexo', c6)
+                            query.exec()
+                    conexion.Conexion.cargarTabCli(self)
                 elif msg.clickedButton() == msg.button(msg.StandardButton.Cancel):
                     print("Importación cancelada")
         except Exception as error:
