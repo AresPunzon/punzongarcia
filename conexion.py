@@ -219,3 +219,130 @@ class Conexion:
 
         except Exception as error:
             print('Error en conexion para exportar excel ', error)
+
+    def altaProd(newProd):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'insert into productos (nombre, precio)'
+                'VALUES (:nombre, :precio)')
+            #query.bindValue(':codigo', str(newProd[0]))
+            query.bindValue(':nombre', str(newProd[0]))
+            query.bindValue(':precio', str(newProd[1]))
+
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Producto dado de Alta')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Problemas alta productos', error)
+
+    def bajaProd(producto):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from productos where nombre = :nombre')
+            query.bindValue(':nombre', str(producto))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Producto eliminado')
+                msg.exec()
+
+        except Exception as error:
+            print('Error eliminar producto en conexión', error)
+
+    def cargarTabProd(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare("select codigo, nombre, precio from productos order by codigo")
+            if query.exec_():
+                while query.next():
+                    codigo = str(query.value(0))
+                    nombre = query.value(1)
+                    precio = str(query.value(2))
+                    var.ui.tabProd.setRowCount(index + 1)
+                    var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                    index += 1
+
+        except Exception as error:
+            print('Problemas en mostrar listado productos', error)
+
+    def modifProd(modprod):
+        try:
+            print(modprod)
+            query = QtSql.QSqlQuery()
+            query.prepare('update productos set codigo = :codigo, nombre = :nombre, precio = :precio '
+                          'where codigo = :codigo')
+            query.bindValue(':codigo', str(modprod[0]))
+            query.bindValue(':nombre', str(modprod[1]))
+            query.bindValue(':precio', str(modprod[2]))
+
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Datos modificados de producto')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en la modificación de productos', error)
+
+    def buscarProducto(prod):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, nombre, precio from productos '
+                          'where nombre = :nombre')
+            query.bindValue(':nombre', prod)
+            codigo = query.value(0)
+            nombre = query.value(1)
+            precio = query.value(2)
+            if query.exec_():
+                var.ui.tabProd.setRowCount(index + 1)
+                var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+            else:
+                print('a')
+
+            # prod = [codigo, nombre, precio]
+            # row = 0
+            # column = 0
+            # var.ui.tabProd.insertRow(row)
+            # for campo in prod:
+            #     cell = QtWidgets.QTableWidgetItem(str(campo))
+            #     var.ui.tabProd.setItem(row, column, cell)
+            #     column += 1
+        except Exception as error:
+            print('Error en la búsqueda de un producto', error)
+
+
+
+
+
+
+
+
+
+
+
+

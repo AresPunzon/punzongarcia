@@ -2,6 +2,8 @@ import locale
 
 import PyQt5.uic.uiparser
 
+import informes
+import products
 from aviso import *
 from ventana import *
 from windowCal import *
@@ -63,6 +65,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiaForm.clicked.connect(clients.Clientes.limpiarForm)
         var.ui.btnBaja.clicked.connect(clients.Clientes.bajaCli)
         var.ui.btnMod.clicked.connect(clients.Clientes.modifCli)
+        var.ui.btnGrabaProd.clicked.connect(products.Productos.guardaProd)
+        var.ui.btnBorraProd.clicked.connect(products.Productos.bajaProd)
+        var.ui.btnModProd.clicked.connect(products.Productos.modifProd)
+        var.ui.btnBuscar.clicked.connect(products.Productos.buscarProd)
         '''
         Eventos de la barra de menús
         '''
@@ -86,11 +92,14 @@ class Main(QtWidgets.QMainWindow):
         events.Eventos.resizeTablaCli(self)
         var.ui.tabCliente.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabCliente.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabProd.clicked.connect(products.Productos.cargaProd)
+        var.ui.tabProd.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         '''
         Base de datos
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTabCli(self)
+        conexion.Conexion.cargarTabProd(self)
         '''
         Eventos de comboBox
         '''
@@ -116,6 +125,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarBackup.triggered.connect(events.Eventos.Backup)
         var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.Restaurar)
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
+        var.ui.actionListado_clientes.triggered.connect(informes.Informes.ListadoCliente)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
