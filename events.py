@@ -34,6 +34,7 @@ class Eventos():
         except Exception as error:
             print('Error al abrir el calendario ', error)
 
+
     def resizeTablaCli(self):
         try:
             header = var.ui.tabCliente.horizontalHeader()

@@ -4,7 +4,8 @@ import xlwt as xlwt
 from PyQt5 import QtSql, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import var
-
+import locale
+locale.setlocale( locale.LC_ALL, '' )
 
 class Conexion:
     def db_connect(filedb):
@@ -261,40 +262,91 @@ class Conexion:
         except Exception as error:
             print('Error eliminar producto en conexión', error)
 
+    # def cargarTabProd(self):
+    #     try:
+    #         index = 0
+    #         query = QtSql.QSqlQuery()
+    #         query.prepare("select codigo, nombre, precio from productos order by codigo")
+    #         if query.exec_():
+    #             while query.next():
+    #                 codigo = str(query.value(0))
+    #                 nombre = query.value(1)
+    #                 precio = str(query.value(2))
+    #                 var.ui.tabProd.setRowCount(index + 1)
+    #                 var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+    #                 var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+    #                 var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+    #                 index += 1
+    #
+    #     except Exception as error:
+    #         print('Problemas en mostrar listado productos', error)
+
     def cargarTabProd(self):
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare("select codigo, nombre, precio from productos order by codigo")
+            query.prepare('select codigo, producto, precio from productos order by producto')
             if query.exec_():
                 while query.next():
-                    codigo = str(query.value(0))
-                    nombre = query.value(1)
-                    precio = str(query.value(2))
-                    var.ui.tabProd.setRowCount(index + 1)
-                    var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
-                    var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                    codigo = query.value(0)
+                    producto = query.value(1)
+                    precio = query.value(2)
+                    var.ui.tabProd.setRowCount(index + 1)  # creamos la fila y luego cargamos datos
+                    var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+                    var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(producto))
                     var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                    from PyQt5.uic.properties import QtCore
+                    var.ui.tabProd.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
-
         except Exception as error:
-            print('Problemas en mostrar listado productos', error)
+            print('Problemas mostrar tabla productos', error)
 
-    def modifProd(modprod):
+    # def modifProd(modprod):
+    #     try:
+    #         print(modprod)
+    #         query = QtSql.QSqlQuery()
+    #         query.prepare('update productos set codigo = :codigo, nombre = :nombre, precio = :precio '
+    #                       'where codigo = :codigo')
+    #         query.bindValue(':codigo', str(modprod[0]))
+    #         query.bindValue(':nombre', str(modprod[1]))
+    #         query.bindValue(':precio', str(modprod[2]))
+    #
+    #         if query.exec_():
+    #             msg = QtWidgets.QMessageBox()
+    #             msg.setWindowTitle('Aviso')
+    #             msg.setIcon(QtWidgets.QMessageBox.Information)
+    #             msg.setText('Datos modificados de producto')
+    #             msg.exec()
+    #         else:
+    #             msg = QtWidgets.QMessageBox()
+    #             msg.setWindowTitle('Aviso')
+    #             msg.setIcon(QtWidgets.QMessageBox.Warning)
+    #             msg.setText(query.lastError().text())
+    #             msg.exec()
+    #
+    #     except Exception as error:
+    #         print('Error en la modificación de productos', error)
+
+    def modifPro(modpro):
         try:
-            print(modprod)
             query = QtSql.QSqlQuery()
-            query.prepare('update productos set codigo = :codigo, nombre = :nombre, precio = :precio '
-                          'where codigo = :codigo')
-            query.bindValue(':codigo', str(modprod[0]))
-            query.bindValue(':nombre', str(modprod[1]))
-            query.bindValue(':precio', str(modprod[2]))
+            query.prepare('update productos set producto =:producto, precio = :precio where codigo = :cod')
+            query.bindValue(':cod', int(modpro[0]))
+            query.bindValue(':producto', str(modpro[1]))
+            modpro[2] = modpro[2].replace('€', '')
+            modpro[2] = modpro[2].replace(',', '.')
+            modpro[2] = float(modpro[2])
+            modpro[2] = round(modpro[2], 2)
+            modpro[2] = str(modpro[2])
+            modpro[2] = locale.currency(float(modpro[2]))
+            query.bindValue(':precio', str(modpro[2]))
 
             if query.exec_():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText('Datos modificados de producto')
+                msg.setText('Datos modificados de Producto')
                 msg.exec()
             else:
                 msg = QtWidgets.QMessageBox()
@@ -302,9 +354,8 @@ class Conexion:
                 msg.setIcon(QtWidgets.QMessageBox.Warning)
                 msg.setText(query.lastError().text())
                 msg.exec()
-
         except Exception as error:
-            print('Error en la modificación de productos', error)
+            print('Error modificar producto en conexion: ', error)
 
     def buscarProducto(prod):
         try:
@@ -335,8 +386,63 @@ class Conexion:
         except Exception as error:
             print('Error en la búsqueda de un producto', error)
 
+    '''
+    Gestión facturas
+    '''
+    def buscaCliFac(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select apellidos, nombre from clientes where dni = :dni')
+            query.bindValue(':dni', str(dni) )
+            if query.exec_():
+                while query.next():
+                    registro.append(query.value(0))
+                    registro.append(query.value(1))
+                print(registro)
+                return registro
 
+        except Exception as error:
+            print('Error en conexión buscar cliente', error)
 
+    def altaFac(registro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into facturas (dni, fechafac) values (:dni, :fecha)')
+            query.bindValue(':dni', str(registro[0]))
+            query.bindValue(':fecha', str(registro[1]))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Factura dada de alta')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en conexión altaFac', error)
+
+    def cargaTabFacturas(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, fechafac from facturas order by fechafac desc')
+            if query.exec_():
+                while query.next():
+                    codigo = str(query.value(0))
+                    fechafac = str(query.value(1))
+                    var.ui.tabFacturas.setRowCount(index + 1)
+                    var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
+                    index += 1
+
+        except Exception as error:
+            print('Error en cargar la tabla de facturas', error)
 
 
 

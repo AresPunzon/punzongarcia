@@ -115,10 +115,13 @@ class Clientes():
     def cargarFecha(qDate):
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtAlta.setText(str(data))
+            if var.ui.tabPrograma.currentIndex()==0:
+                var.ui.txtAlta.setText(str(data))
+            if var.ui.tabPrograma.currentIndex()==1:
+                var.ui.txtFechaFac.setText(str(data))
             var.dlgCalendar.hide()
         except Exception as error:
-            print('Error al cargar fecha, ', error)
+            print('Error cargar fecha en txtFecha', error)
 
     def mayuscNome():
         try:
@@ -262,6 +265,8 @@ class Clientes():
             elif str(registro[3]) == 'Mujer':
                 var.ui.rbtMujer.setChecked(True)
             var.ui.spinEnvio.setValue(registro[4])
+            var.ui.txtDNIFac.setText(var.ui.txtdni.text())
+            var.ui.lblNomFac.setText(var.ui.txtAlta.text())
 
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)

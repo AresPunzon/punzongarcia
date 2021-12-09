@@ -2,6 +2,7 @@ import locale
 
 import PyQt5.uic.uiparser
 
+import facturas
 import informes
 import products
 from aviso import *
@@ -69,6 +70,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBorraProd.clicked.connect(products.Productos.bajaProd)
         var.ui.btnModProd.clicked.connect(products.Productos.modifProd)
         var.ui.btnBuscar.clicked.connect(products.Productos.buscarProd)
+        var.ui.btnBuscaCliFac.clicked.connect(facturas.Facturas.buscaCli)
+        var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
+        var.ui.btnFacturar.clicked.connect(facturas.Facturas.altaFac)
         '''
         Eventos de la barra de menús
         '''
@@ -94,12 +98,15 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabCliente.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabProd.clicked.connect(products.Productos.cargaProd)
         var.ui.tabProd.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabFacturas.clicked.connect(facturas.Facturas.cargaFac)
+        var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         '''
         Base de datos
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTabCli(self)
         conexion.Conexion.cargarTabProd(self)
+        conexion.Conexion.cargaTabFacturas(self)
         '''
         Eventos de comboBox
         '''
