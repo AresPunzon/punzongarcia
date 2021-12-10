@@ -58,7 +58,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de botón
         '''
-        var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
+        #var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
         #var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
         #var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
@@ -73,6 +73,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBuscaCliFac.clicked.connect(facturas.Facturas.buscaCli)
         var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(facturas.Facturas.altaFac)
+        var.ui.btnPdfCli.clicked.connect(informes.Informes.ListadoCliente)
         '''
         Eventos de la barra de menús
         '''
