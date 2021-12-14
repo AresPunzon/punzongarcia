@@ -114,10 +114,11 @@ class Clientes():
 
     def cargarFecha(qDate):
         try:
-            data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
+            data = (str(qDate.day()).zfill(0)+ '/'+ str(qDate.month()).zfill(0) + '/' + str(qDate.year()))
+            #data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
             if var.ui.tabPrograma.currentIndex()==0:
                 var.ui.txtAlta.setText(str(data))
-            if var.ui.tabPrograma.currentIndex()==1:
+            elif var.ui.tabPrograma.currentIndex()==1:
                 var.ui.txtFechaFac.setText(str(data))
             var.dlgCalendar.hide()
         except Exception as error:

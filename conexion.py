@@ -444,6 +444,18 @@ class Conexion:
         except Exception as error:
             print('Error en cargar la tabla de facturas', error)
 
+    def buscaDNIFac(numFac):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select dni from facturas where codigo = :numFac')
+            query.bindValue(':numFac', int(numFac))
+            if query.exec_():
+                while query.next():
+                    dni = query.value(0)
+            return dni
+
+        except Exception as error:
+            print('Error al buscar cliente de una factura', error)
 
 
 

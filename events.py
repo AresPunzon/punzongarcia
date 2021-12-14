@@ -45,6 +45,16 @@ class Eventos():
         except Exception as error:
             print('Error al redimensionar la tabla ', error)
 
+    def resizeTablaArticulos(self):
+        try:
+            header = var.ui.tabProd.horizontalHeader()
+            for i in range(3):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 0 or i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print('Error al redimensionar la tabla ', error)
+
     def Abrir(self):
         try:
             var.dlgabrir.show()

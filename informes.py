@@ -63,7 +63,7 @@ class Informes:
             var.cv.save()
             cont = 0
             for file in os.listdir(rootPath):
-                if file.endswith('.pdf'):
+                if file.endswith('clientes.pdf'):
                     os.startfile("%s/%s" % (rootPath, file))
                 cont = cont +1
 
@@ -101,7 +101,59 @@ class Informes:
         except Exception as error:
             print('Error al creación pie del informe ', error)
 
+    def ListadoArticulo(self):
+        try:
+            var.cv = canvas.Canvas('informes/listadoproductos.pdf')
+            Informes.cabecera(self)
 
+            rootPath = '.\\informes'
+            var.cv.setFont('Helvetica-Bold', size = 10)
+            textoTitulo = 'Listado Artículos'
+            Informes.pie(textoTitulo)
+            var.cv.drawString(255, 690, textoTitulo)
+            var.cv.line(40, 685, 530, 685)
+            items = ['Código', 'Artículos', 'Precio/kg']
+            var.cv.drawString(70, 675, items[0])
+            var.cv.drawString(210, 675, items[1])
+            var.cv.drawString(370, 675, items[2])
+            var.cv.line(40, 670, 530, 670)
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, nombre, precio from productos')
+            var.cv.setFont('Helvetica', size = 8)
+            if query.exec_():
+                i = 50
+                j = 655
+                while query.next():
+                    if j <= 80:
+                        var.cv.drawString(440, 30, 'Página siguiente...')
+                        var.cv.showPage()
+                        Informes.cabecera(self)
+                        Informes.pie(textoTitulo)
+                        var.cv.drawString(255, 690, textoTitulo)
+                        var.cv.line(40, 685, 530, 685)
+                        items = ['Código', 'Artículos', 'Precio/kg']
+                        var.cv.drawString(70, 675, items[0])
+                        var.cv.drawString(210, 675, items[1])
+                        var.cv.drawString(370, 675, items[2])
+                        var.cv.line(40, 670, 530, 670)
+                        i = 50
+                        j = 655
+
+                    var.cv.setFont('Helvetica', size= 8)
+                    var.cv.drawRightString(i, j, str(query.value(0)))
+                    var.cv.drawString(i+140, j, str(query.value(1)))
+                    var.cv.drawString(i+310, j, str(query.value(2)))
+                    j = j - 20
+
+            var.cv.save()
+            cont = 0
+            for file in os.listdir(rootPath):
+                if file.endswith('productos.pdf'):
+                    os.startfile("%s/%s" % (rootPath, file))
+                cont = cont +1
+
+        except Exception as error:
+            print('Error al hacer el informe ', error)
 
 
 
