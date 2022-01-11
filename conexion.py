@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import xlwt as xlwt
-from PyQt5 import QtSql, QtWidgets
+from PyQt5 import QtSql, QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QMessageBox
 import var
 import locale
@@ -295,7 +295,7 @@ class Conexion:
                     var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(producto))
                     var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
-                    from PyQt5.uic.properties import QtCore
+                    #from PyQt5.uic.properties import QtCore
                     var.ui.tabProd.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
                     var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
@@ -427,22 +427,51 @@ class Conexion:
         except Exception as error:
             print('Error en conexión altaFac', error)
 
+    # def cargaTabFacturas(self):
+    #     try:
+    #         index = 0
+    #         query = QtSql.QSqlQuery()
+    #         query.prepare('select codigo, fechafac from facturas order by fechafac desc')
+    #         if query.exec_():
+    #             while query.next():
+    #                 codigo = str(query.value(0))
+    #                 fechafac = str(query.value(1))
+    #                 var.ui.tabFacturas.setRowCount(index + 1)
+    #                 var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+    #                 var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
+    #                 index += 1
+    #
+    #     except Exception as error:
+    #         print('Error en cargar la tabla de facturas', error)
+
     def cargaTabFacturas(self):
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select codigo, fechafac from facturas order by fechafac desc')
+            query.prepare('select codigo, fechafac from facturas order by date(fechafac) desc ')
             if query.exec_():
                 while query.next():
-                    codigo = str(query.value(0))
-                    fechafac = str(query.value(1))
-                    var.ui.tabFacturas.setRowCount(index + 1)
-                    var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
+                    codigo = query.value(0)
+                    fechafac = query.value(1)
+                    var.btnfacdel = QtWidgets.QPushButton()
+                    icopapelera = QtGui.QPixmap("img/bin.png")
+                    var.btnfacdel.setFixedSize(24, 24)
+                    var.btnfacdel.setIcon(QtGui.QIcon(icopapelera))
+                    var.ui.tabFacturas.setRowCount(index + 1)  # creamos la fila y luego cargamos datos
+                    var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
-                    index += 1
+                    cell_widget = QtWidgets.QWidget()
+                    lay_out = QtWidgets.QHBoxLayout(cell_widget)
+                    lay_out.addWidget(var.btnfacdel)
+                    var.btnfacdel.clicked.connect(Conexion.bajaFac)
+                    lay_out.setAlignment(QtCore.Qt.AlignVCenter)
+                    var.ui.tabFacturas.setCellWidget(index, 2, cell_widget)
+                    var.ui.tabFacturas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
 
         except Exception as error:
-            print('Error en cargar la tabla de facturas', error)
+            print('Error en carga listado facturas ', error)
 
     def buscaDNIFac(numFac):
         try:
@@ -457,6 +486,21 @@ class Conexion:
         except Exception as error:
             print('Error al buscar cliente de una factura', error)
 
+    def bajaFac(self):
+        try:
+            print('a')
+            # query = QtSql.QSqlQuery()
+            # query.prepare('delete from facturas where nombre = :nombre')
+            # query.bindValue(':nombre', str(producto))
+            # if query.exec_():
+            #     msg = QtWidgets.QMessageBox()
+            #     msg.setWindowTitle('Aviso')
+            #     msg.setIcon(QtWidgets.QMessageBox.Information)
+            #     msg.setText('Factura eliminada')
+            #     msg.exec()
+
+        except Exception as error:
+            print('Error al dar de baja una factura ', error)
 
 
 
