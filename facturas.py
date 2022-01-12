@@ -14,6 +14,8 @@ class Facturas():
             if registro:
                 nombre = registro[0] + ", " + registro[1]
                 var.ui.lblNomFac.setText(nombre)
+                var.ui.lblNumFactura.setText("")
+                car.ui.txtFechaFac.setText("")
             else:
                 msgBox = QMessageBox()
                 msgBox.setIcon(QtWidgets.QMessageBox.Information)

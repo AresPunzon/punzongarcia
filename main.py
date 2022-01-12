@@ -75,6 +75,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFacturar.clicked.connect(facturas.Facturas.altaFac)
         var.ui.btnPdfCli.clicked.connect(informes.Informes.ListadoCliente)
         var.ui.btnReportArticulos.clicked.connect(informes.Informes.ListadoArticulo)
+        var.ui.btnReportCli.clicked.connect(events.Eventos.Imprimir)
         '''
         Eventos de la barra de menús
         '''
@@ -97,6 +98,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         events.Eventos.resizeTablaCli(self)
         events.Eventos.resizeTablaArticulos(self)
+        events.Eventos.resizeTablaFacturas(self)
         var.ui.tabCliente.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabCliente.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabProd.clicked.connect(products.Productos.cargaProd)

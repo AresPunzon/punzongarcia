@@ -55,7 +55,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -893,10 +893,13 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
        <rect>
         <x>40</x>
         <y>180</y>
-        <width>211</width>
+        <width>251</width>
         <height>331</height>
        </rect>
       </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>Num Factura</string>
@@ -905,6 +908,11 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
       <column>
        <property name="text">
         <string>Fecha</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string/>
        </property>
       </column>
      </widget>

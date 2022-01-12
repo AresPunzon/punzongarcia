@@ -3,6 +3,8 @@ from datetime import datetime
 import xlwt as xlwt
 from PyQt5 import QtSql, QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QMessageBox
+
+import conexion
 import var
 import locale
 locale.setlocale( locale.LC_ALL, '' )
@@ -285,12 +287,12 @@ class Conexion:
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select codigo, producto, precio from productos order by producto')
+            query.prepare('select codigo, nombre, precio from productos order by nombre')
             if query.exec_():
                 while query.next():
-                    codigo = query.value(0)
-                    producto = query.value(1)
-                    precio = query.value(2)
+                    codigo = str(query.value(0))
+                    producto = str(query.value(1))
+                    precio = str(query.value(2))
                     var.ui.tabProd.setRowCount(index + 1)  # creamos la fila y luego cargamos datos
                     var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(producto))
@@ -462,9 +464,10 @@ class Conexion:
                     var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
                     cell_widget = QtWidgets.QWidget()
                     lay_out = QtWidgets.QHBoxLayout(cell_widget)
+                    lay_out.setContentsMargins(0, 0, 0, 0)
                     lay_out.addWidget(var.btnfacdel)
                     var.btnfacdel.clicked.connect(Conexion.bajaFac)
-                    lay_out.setAlignment(QtCore.Qt.AlignVCenter)
+                    #lay_out.setAlignment(QtCore.Qt.AlignVCenter)
                     var.ui.tabFacturas.setCellWidget(index, 2, cell_widget)
                     var.ui.tabFacturas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     var.ui.tabFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
@@ -488,16 +491,16 @@ class Conexion:
 
     def bajaFac(self):
         try:
-            print('a')
-            # query = QtSql.QSqlQuery()
-            # query.prepare('delete from facturas where nombre = :nombre')
-            # query.bindValue(':nombre', str(producto))
-            # if query.exec_():
-            #     msg = QtWidgets.QMessageBox()
-            #     msg.setWindowTitle('Aviso')
-            #     msg.setIcon(QtWidgets.QMessageBox.Information)
-            #     msg.setText('Factura eliminada')
-            #     msg.exec()
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from facturas where codigo = :codigo')
+            query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Factura eliminada')
+                msg.exec()
+            Conexion.cargaTabFacturas(self)
 
         except Exception as error:
             print('Error al dar de baja una factura ', error)

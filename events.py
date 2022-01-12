@@ -43,7 +43,17 @@ class Eventos():
                 if i == 0 or i == 3:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
-            print('Error al redimensionar la tabla ', error)
+            print('Error al redimensionar la tabla de clientes ', error)
+
+    def resizeTablaFacturas(self):
+        try:
+            header = var.ui.tabFacturas.horizontalHeader()
+            for i in range(3):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print('Error al redimensionar la tabla de facturas', error)
 
     def resizeTablaArticulos(self):
         try:
@@ -53,7 +63,7 @@ class Eventos():
                 if i == 0 or i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
-            print('Error al redimensionar la tabla ', error)
+            print('Error al redimensionar la tabla de artículos ', error)
 
     def Abrir(self):
         try:
