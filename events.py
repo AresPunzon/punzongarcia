@@ -58,12 +58,20 @@ class Eventos():
     def resizeTablaArticulos(self):
         try:
             header = var.ui.tabProd.horizontalHeader()
-            for i in range(3):
+            for i in range(5):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+        except Exception as error:
+            print('Error al redimensionar la tabla de artículos ', error)
+
+    def resizeTablaVentas(self):
+        try:
+            header = var.ui.tabVentas.horizontalHeader()
+            for i in range(4):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 if i == 0 or i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
-            print('Error al redimensionar la tabla de artículos ', error)
+            print('Error al redimensionar la tabla de ventas ', error)
 
     def Abrir(self):
         try:

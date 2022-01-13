@@ -366,10 +366,11 @@ class Conexion:
             query.prepare('select codigo, nombre, precio from productos '
                           'where nombre = :nombre')
             query.bindValue(':nombre', prod)
-            codigo = query.value(0)
-            nombre = query.value(1)
-            precio = query.value(2)
             if query.exec_():
+                query.next()
+                codigo = str(query.value(0))
+                nombre = str(query.value(1))
+                precio = str(query.value(2))
                 var.ui.tabProd.setRowCount(index + 1)
                 var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(codigo))
                 var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))

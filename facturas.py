@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
 
 import var
@@ -15,7 +15,7 @@ class Facturas():
                 nombre = registro[0] + ", " + registro[1]
                 var.ui.lblNomFac.setText(nombre)
                 var.ui.lblNumFactura.setText("")
-                car.ui.txtFechaFac.setText("")
+                var.ui.txtFechaFac.setText("")
             else:
                 msgBox = QMessageBox()
                 msgBox.setIcon(QtWidgets.QMessageBox.Information)
@@ -60,6 +60,20 @@ class Facturas():
 
         except Exception as error:
             print('Error al cargar datos de una factura ', error)
+
+    def cargarLineaVenta(self):
+        try:
+            index = 0
+            var.cmbProducto = QtWidgets.QComboBox()
+            var.txtCantidad = QtWidgets.QLineEdit()
+            var.cmbProducto.setFixedSize(150, 25)
+            var.txtCantidad.setFixedSize(60, 25)
+            var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
+            var.ui.tabVentas.setRowCount(index + 1)
+            var.ui.tabVentas.setCellWidget(index, 1, var.cmbProducto)
+            var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
+        except Exception as error:
+            print('Error al cargar linea venta ', error)
 
 
 

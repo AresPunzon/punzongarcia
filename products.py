@@ -85,6 +85,16 @@ class Productos():
         except Exception as error:
             print('Error al buscar un producto ', error)
 
+    def limpiaFormProd(self):
+        try:
+            var.ui.txtCod.setText("")
+            var.ui.txtProd.setText("")
+            var.ui.txtPrecio.setText("")
+            var.ui.txtBuscar.setText("")
+            conexion.Conexion.cargarTabProd(self)
+        except Exception as error:
+            print('Error al limpiar formulario productos ', error)
+
 
 
 

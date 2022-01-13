@@ -76,6 +76,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnPdfCli.clicked.connect(informes.Informes.ListadoCliente)
         var.ui.btnReportArticulos.clicked.connect(informes.Informes.ListadoArticulo)
         var.ui.btnReportCli.clicked.connect(events.Eventos.Imprimir)
+        var.ui.btnLimpiaFormProd.clicked.connect(products.Productos.limpiaFormProd)
         '''
         Eventos de la barra de menús
         '''
@@ -99,12 +100,16 @@ class Main(QtWidgets.QMainWindow):
         events.Eventos.resizeTablaCli(self)
         events.Eventos.resizeTablaArticulos(self)
         events.Eventos.resizeTablaFacturas(self)
+        events.Eventos.resizeTablaVentas(self)
         var.ui.tabCliente.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabCliente.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabProd.clicked.connect(products.Productos.cargaProd)
         var.ui.tabProd.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabFacturas.clicked.connect(facturas.Facturas.cargaFac)
         var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        #facturas.Facturas.preparaLineaVenta(self)
+        facturas.Facturas.cargarLineaVenta(self)
         '''
         Base de datos
         '''

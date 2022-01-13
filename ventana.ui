@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>706</height>
+    <width>919</width>
+    <height>727</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -38,8 +38,13 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">rgb:(170, 170, 0)
-font: 87 8pt &quot;Segoe UI Black&quot;;</string>
+     <string notr="true">QLabel{
+color:'white';
+background-color:#00aa00;
+border: 3px solid white;
+align: center;
+
+}</string>
     </property>
     <property name="text">
      <string>Xestión clientes</string>
@@ -897,6 +902,9 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         <height>331</height>
        </rect>
       </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
       <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
@@ -959,6 +967,57 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>150</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>VENTAS</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tabVentas">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>180</y>
+        <width>391</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <column>
+       <property name="text">
+        <string>Cod Venta</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Producto</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Precio</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cantidad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total Venta</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
@@ -1122,22 +1181,39 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="btnReportArticulos">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>570</x>
         <y>50</y>
-        <width>31</width>
-        <height>23</height>
+        <width>64</width>
+        <height>26</height>
        </rect>
       </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>img/ojo.png</normaloff>img/ojo.png</iconset>
-      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_15">
+       <item>
+        <widget class="QPushButton" name="btnReportArticulos">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/ojo.png</normaloff>img/ojo.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnLimpiaFormProd">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/reload.png</normaloff>img/reload.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -1166,7 +1242,7 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
+     <width>919</width>
      <height>21</height>
     </rect>
    </property>
@@ -1336,11 +1412,11 @@ font: 87 8pt &quot;Segoe UI Black&quot;;</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>
