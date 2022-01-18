@@ -53,9 +53,9 @@ align: center;
    <widget class="QTabWidget" name="tabPrograma">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>30</x>
       <y>50</y>
-      <width>721</width>
+      <width>861</width>
       <height>561</height>
      </rect>
     </property>
@@ -898,7 +898,7 @@ align: center;
        <rect>
         <x>40</x>
         <y>180</y>
-        <width>251</width>
+        <width>221</width>
         <height>331</height>
        </rect>
       </property>
@@ -984,10 +984,10 @@ align: center;
      <widget class="QTableWidget" name="tabVentas">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>280</x>
         <y>180</y>
-        <width>391</width>
-        <height>211</height>
+        <width>561</width>
+        <height>251</height>
        </rect>
       </property>
       <property name="verticalScrollBarPolicy">
@@ -1181,7 +1181,7 @@ align: center;
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>570</x>
@@ -1412,11 +1412,11 @@ align: center;
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

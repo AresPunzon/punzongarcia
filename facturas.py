@@ -85,7 +85,7 @@ class Facturas():
             codigo = dato[0]
             var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precio)))
             var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
-            var.ui.tabVentas.item(row, 2).setTextAligment(QtCore.Qt.AlignCenter)
+            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
 
         except Exception as error:
             print('Error al procesar una venta ', error)
