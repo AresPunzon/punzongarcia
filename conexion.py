@@ -506,6 +506,34 @@ class Conexion:
         except Exception as error:
             print('Error al dar de baja una factura ', error)
 
+    def cargarCmbProducto(self):
+        try:
+            var.cmbproducto.clear()
+            query = QtSql.QSqlQuery()
+            var.cmbproducto.addItem('') #primera línea en blanco
+            query.prepare('select nombre from productos order by nombre')
+            if query.exec_():
+                while query.next():
+                    var.cmbproducto.addItem(query.value(0))
+
+        except Exception as error:
+            print('Error al cargar un producto en la ComboBox ', error)
+
+    def obtenerPrecio(articulo):
+        try:
+            dato = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, precio from productos where nombre = :nombre')
+            query.bindValue(':nombre', str(articulo))
+            if query.exec_():
+                while query.next():
+                    dato.append(int(query.value(0)))
+                    dato.append(query.value(1))
+            return dato
+
+        except Exception as error:
+            print('Error al cargar código precio en conexión ', error)
+
 
 
 

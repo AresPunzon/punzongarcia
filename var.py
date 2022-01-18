@@ -9,6 +9,7 @@ global dlgabrir
 global copia
 global cv
 global btnfacdel
+global cmbproducto
 
 '''
 Otras variables

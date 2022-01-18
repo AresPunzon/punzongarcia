@@ -1,7 +1,5 @@
 import locale
 
-import PyQt5.uic.uiparser
-
 import facturas
 import informes
 import products
@@ -124,6 +122,8 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMuni)
         # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)
+        conexion.Conexion.cargarCmbProducto(self)
+        var.cmbproducto.currentIndexChanged.connect(facturas.Facturas.procesoVenta)
         '''
         spinbox
         '''

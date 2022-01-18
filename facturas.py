@@ -64,18 +64,31 @@ class Facturas():
     def cargarLineaVenta(self):
         try:
             index = 0
-            var.cmbProducto = QtWidgets.QComboBox()
+            var.cmbproducto = QtWidgets.QComboBox()
             var.txtCantidad = QtWidgets.QLineEdit()
-            var.cmbProducto.setFixedSize(150, 25)
+            #conexion.Conexion.cargarCmbProducto()
+            var.cmbproducto.setFixedSize(150, 25)
             var.txtCantidad.setFixedSize(60, 25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
             var.ui.tabVentas.setRowCount(index + 1)
-            var.ui.tabVentas.setCellWidget(index, 1, var.cmbProducto)
+            var.ui.tabVentas.setCellWidget(index, 1, var.cmbproducto)
             var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
         except Exception as error:
             print('Error al cargar linea venta ', error)
 
+    def procesoVenta(self):
+        try:
+            articulo = var.cmbproducto.currentText()
+            dato = conexion.Conexion.obtenerPrecio(articulo)
+            row = var.ui.tabVentas.currentRow()
+            precio = dato[1]
+            codigo = dato[0]
+            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precio)))
+            var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+            var.ui.tabVentas.item(row, 2).setTextAligment(QtCore.Qt.AlignCenter)
 
+        except Exception as error:
+            print('Error al procesar una venta ', error)
 
 
 
