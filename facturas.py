@@ -1,8 +1,12 @@
+import none as none
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
 
 import var
 import conexion
+from babel.numbers import format_currency
+import locale
+locale.setlocale( locale.LC_ALL, '' )
 
 
 class Facturas():
@@ -38,6 +42,8 @@ class Facturas():
             conexion.Conexion.buscaCliFac(dni)
             conexion.Conexion.altaFac(registro)
             conexion.Conexion.cargaTabFacturas(self)
+            codfac = conexion.Conexion.buscaCodFac(self)
+            var.ui.lblNumFactura.setText(str(codfac))
 
         except Exception as error:
             print("Error alta en facturas ", error)
@@ -65,7 +71,7 @@ class Facturas():
         try:
             index = 0
             var.cmbproducto = QtWidgets.QComboBox()
-            var.txtCantidad = QtWidgets.QLineEdit()
+            #var.txtCantidad = QtWidgets.QLineEdit()
             #conexion.Conexion.cargarCmbProducto()
             var.cmbproducto.setFixedSize(150, 25)
             var.txtCantidad.setFixedSize(60, 25)
@@ -81,14 +87,34 @@ class Facturas():
             articulo = var.cmbproducto.currentText()
             dato = conexion.Conexion.obtenerPrecio(articulo)
             row = var.ui.tabVentas.currentRow()
-            precio = dato[1]
-            codigo = dato[0]
-            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precio)))
-            var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+            var.precio = dato[1]
+            precioEu = format_currency(dato[1], 'EUR', locale='de_DE')
+            var.codpro = dato[0]
+            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precioEu)))
+            #var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
             var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
 
         except Exception as error:
             print('Error al procesar una venta ', error)
+
+    def totalLineaVenta(self = none):
+        try:
+            venta = []
+            row = var.ui.tabVentas.currentRow()
+            cantidad = round(float(var.txtCantidad.text().replace(",", ".")), 2)
+            totalLinea = round(float(var.precio) * float(cantidad), 2)
+            var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(totalLinea) + '€'))
+            var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
+            codfac = var.ui.lblNumFactura.text()
+            venta.append(int(codfac))
+            venta.append(int(var.codpro))
+            venta.append((float(var.precio)))
+            venta.append(float(cantidad))
+            print(venta)
+            conexion.Conexion.cargarVenta(venta)
+
+        except Exception as error:
+            print('Error al procesar el total de una venta ', error)
 
 
 

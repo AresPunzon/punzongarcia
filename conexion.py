@@ -330,10 +330,10 @@ class Conexion:
     #     except Exception as error:
     #         print('Error en la modificación de productos', error)
 
-    def modifPro(modpro):
+    def modifProd(modpro):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('update productos set producto =:producto, precio = :precio where codigo = :cod')
+            query.prepare('update productos set nombre = :producto, precio = :precio where codigo = :cod')
             query.bindValue(':cod', int(modpro[0]))
             query.bindValue(':producto', str(modpro[1]))
             modpro[2] = modpro[2].replace('€', '')
@@ -341,7 +341,7 @@ class Conexion:
             modpro[2] = float(modpro[2])
             modpro[2] = round(modpro[2], 2)
             modpro[2] = str(modpro[2])
-            modpro[2] = locale.currency(float(modpro[2]))
+            #modpro[2] = locale.currency(float(modpro[2]))
             query.bindValue(':precio', str(modpro[2]))
 
             if query.exec_():
@@ -490,6 +490,18 @@ class Conexion:
         except Exception as error:
             print('Error al buscar cliente de una factura', error)
 
+    def buscaCodFac(self):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo from facturas order by codigo desc limit 1')
+            if query.exec_():
+                while query.next():
+                    codfac = query.value(0)
+            return codfac
+
+        except Exception as error:
+            print('Error al buscar código de una factura', error)
+
     def bajaFac(self):
         try:
             query = QtSql.QSqlQuery()
@@ -533,6 +545,25 @@ class Conexion:
 
         except Exception as error:
             print('Error al cargar código precio en conexión ', error)
+
+    def cargarVenta(venta):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into ventas (codfac, codprod, precio, cantidad) '
+                          'values (:codfac, :codprod, :precio, :cantidad)')
+            query.bindValue(':codfac', venta[0])
+            query.bindValue(':codprod', venta[1])
+            query.bindValue(':precio', venta[2])
+            query.bindValue(':cantidad', venta[3])
+            if query.exec_():
+                var.ui.lblVenta.setText("Venta realizada")
+                var.ui.lblVenta.setStyleSheet('QLabel {color: green;}')
+            else:
+                var.ui.lblVenta.setText("Error en venta")
+                var.ui.lblVenta.setStyleSheet('QLabel {color: red;}')
+
+        except Exception as error:
+            print('Error al cargar venta ', error)
 
 
 

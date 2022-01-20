@@ -8,7 +8,9 @@ from ventana import *
 from windowCal import *
 import sys, var, events, conexion, clients, locale
 from datetime import *
+
 locale.setlocale(locale.LC_ALL, 'es-ES')
+
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -23,6 +25,7 @@ class DialogCalendar(QtWidgets.QDialog):
         anoactual = datetime.now().year
         var.dlgCalendar.calendar.setSelectedDate((QtCore.QDate(anoactual, mesactual, diactual)))
         var.dlgCalendar.calendar.clicked.connect(clients.Clientes.cargarFecha)
+
 
 class DialogAviso(QtWidgets.QDialog):
     '''
@@ -40,6 +43,7 @@ class DialogAviso(QtWidgets.QDialog):
         var.dlgaviso.btnboxaviso.accepted.connect(self.accept)
         var.dlgaviso.btnboxaviso.rejected.connect(self.reject)
 
+
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         '''
@@ -56,9 +60,9 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de botón
         '''
-        #var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
-        #var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
-        #var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
+        # var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
+        # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
+        # var.ui.chGroupPago.buttonClicked.connect(clients.Clientes.setPago)
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)
         var.ui.btnLimpiaForm.clicked.connect(clients.Clientes.limpiarForm)
@@ -92,6 +96,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayuscNome)
         var.ui.txtApe.editingFinished.connect(clients.Clientes.mayuscApe)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayuscDir)
+        var.txtCantidad = QtWidgets.QLineEdit()
+        var.txtCantidad.editingFinished.connect(facturas.Facturas.totalLineaVenta)
         '''
         Eventos QTwidget
         '''
@@ -106,7 +112,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFacturas.clicked.connect(facturas.Facturas.cargaFac)
         var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        #facturas.Facturas.preparaLineaVenta(self)
+        # facturas.Facturas.preparaLineaVenta(self)
         facturas.Facturas.cargarLineaVenta(self)
         '''
         Base de datos
@@ -144,6 +150,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarImprimir.triggered.connect(events.Eventos.Imprimir)
         var.ui.actionListado_clientes.triggered.connect(informes.Informes.ListadoCliente)
 
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     ventana = Main()
@@ -153,6 +160,6 @@ if __name__ == '__main__':
     ventana.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgCalendar = DialogCalendar()
-    var.dlgabrir=FileDialogAbrir()
+    var.dlgabrir = FileDialogAbrir()
     ventana.show()
     sys.exit(app.exec())
