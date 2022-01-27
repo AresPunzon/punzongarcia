@@ -8,7 +8,6 @@ from babel.numbers import format_currency
 import locale
 locale.setlocale( locale.LC_ALL, '' )
 
-
 class Facturas():
     def buscaCli(self):
         try:
@@ -63,18 +62,35 @@ class Facturas():
             if registro:
                 nombre = registro[0] + ", " + registro[1]
                 var.ui.lblNomFac.setText(nombre)
+            conexion.Conexion.cargarLineasVenta(str(var.ui.lblNumFactura.text()))
 
         except Exception as error:
             print('Error al cargar datos de una factura ', error)
 
-    def cargarLineaVenta(self):
+    # def cargarLineaVenta(self):
+    #     try:
+    #         index = 0
+    #         var.cmbproducto = QtWidgets.QComboBox()
+    #         #var.txtCantidad = QtWidgets.QLineEdit()
+    #         #conexion.Conexion.cargarCmbProducto()
+    #         var.cmbproducto.setFixedSize(150, 25)
+    #         var.txtCantidad.setFixedSize(60, 25)
+    #         var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
+    #         var.ui.tabVentas.setRowCount(index + 1)
+    #         var.ui.tabVentas.setCellWidget(index, 1, var.cmbproducto)
+    #         var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
+    #     except Exception as error:
+    #         print('Error al cargar linea venta ', error)
+
+    def cargarLineaVenta(index):
         try:
-            index = 0
             var.cmbproducto = QtWidgets.QComboBox()
-            #var.txtCantidad = QtWidgets.QLineEdit()
-            #conexion.Conexion.cargarCmbProducto()
-            var.cmbproducto.setFixedSize(150, 25)
-            var.txtCantidad.setFixedSize(60, 25)
+            var.cmbproducto.currentIndexChanged.connect(Facturas.procesoVenta)
+            var.cmbproducto.setFixedSize(170, 25)
+            conexion.Conexion.cargarCmbProducto(self=None)
+            var.txtCantidad = QtWidgets.QLineEdit()
+            var.txtCantidad.editingFinished.connect(Facturas.totalLineaVenta)
+            var.txtCantidad.setFixedSize(80, 25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
             var.ui.tabVentas.setRowCount(index + 1)
             var.ui.tabVentas.setCellWidget(index, 1, var.cmbproducto)
@@ -97,7 +113,7 @@ class Facturas():
         except Exception as error:
             print('Error al procesar una venta ', error)
 
-    def totalLineaVenta(self = none):
+    def totalLineaVenta(self = None):
         try:
             venta = []
             row = var.ui.tabVentas.currentRow()
@@ -115,6 +131,51 @@ class Facturas():
 
         except Exception as error:
             print('Error al procesar el total de una venta ', error)
+
+    def limpiarFacturas(self):
+        try:
+            var.ui.txtDNIFac.setText("")
+            var.ui.lblNumFactura.setText("")
+            var.ui.txtFechaFac.setText("")
+            var.ui.lblNomFac.setText("")
+            conexion.Conexion.cargaTabFacturas(self)
+
+        except Exception as error:
+            print('Error al limpiar campos de factura ', error)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

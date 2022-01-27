@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5 import QtPrintSupport, QtSql
 
 import conexion
+import facturas
 from ventana import *
 from datetime import date, datetime
 from zipfile import ZipFile

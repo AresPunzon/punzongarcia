@@ -1,10 +1,12 @@
 from datetime import datetime
 
+import self as self
 import xlwt as xlwt
 from PyQt5 import QtSql, QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QMessageBox
 
 import conexion
+import facturas
 import var
 import locale
 locale.setlocale( locale.LC_ALL, '' )
@@ -518,7 +520,7 @@ class Conexion:
         except Exception as error:
             print('Error al dar de baja una factura ', error)
 
-    def cargarCmbProducto(self):
+    def cargarCmbProducto(self = None):
         try:
             var.cmbproducto.clear()
             query = QtSql.QSqlQuery()
@@ -558,12 +560,103 @@ class Conexion:
             if query.exec_():
                 var.ui.lblVenta.setText("Venta realizada")
                 var.ui.lblVenta.setStyleSheet('QLabel {color: green;}')
+                Conexion.cargarLineasVenta(venta[0])
             else:
                 var.ui.lblVenta.setText("Error en venta")
                 var.ui.lblVenta.setStyleSheet('QLabel {color: red;}')
 
         except Exception as error:
             print('Error al cargar venta ', error)
+
+    def cargarLineasVenta(codfac):
+        try:
+            suma = 0.0
+            #facturas.Facturas.cargarLineaVenta(0)
+            var.ui.tabVentas.clearContents()
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codventa, precio, cantidad, codprod from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    precio = str(query.value(1))
+                    cantidad = str(query.value(2))
+                    prod = query.value(3)
+
+                    producto = Conexion.buscaArt(prod)
+
+                    suma = suma + (float(precio) * float(cantidad))
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index,0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(producto)))
+                    var.ui.tabVentas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.setItem(index, 2, QtWidgets.QTableWidgetItem(str(precio + '€')))
+                    var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabVentas.setItem(index, 3, QtWidgets.QTableWidgetItem(str(cantidad)))
+                    var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.setItem(index, 4, QtWidgets.QTableWidgetItem(str(float(precio) * float(cantidad))+ '€'))
+                    var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
+                    index = index + 1
+            facturas.Facturas.cargarLineaVenta(index)
+            iva = suma * 0.21
+            total = suma + iva
+            var.ui.lblSubTotal.setText(str(round(suma,2)) + '€')
+            var.ui.lblIva.setText(str(round(iva, 2)) + '€')
+            var.ui.lblTotal.setText(str(round(total, 2)) + '€')
+
+        except Exception as error:
+            print('error cargar las líneas de venta', error)
+
+    def buscaArt(prod):
+        try:
+            query2 = QtSql.QSqlQuery()
+            query2.prepare('select nombre from productos where codigo = :codigo')
+            query2.bindValue(':codigo', int(prod))
+            if query2.exec_():
+                while query2.next():
+                    producto = query2.value(0)
+
+            return producto
+
+        except Exception as error:
+            print('error cargar las líneas de venta', error)
+
+    def borrarVenta(self):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from ventas where codigo = :codigo')
+            #query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Venta eliminada')
+                msg.exec()
+            facturas.Facturas.cargaFac(self)
+
+        except Exception as error:
+            print('Error al borrar una venta ', error)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

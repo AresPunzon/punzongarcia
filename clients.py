@@ -160,37 +160,38 @@ class Clientes():
 
     def guardaCli(self):
         try:
-            if Clientes.validarDNI() == True:
-                # Preparamos el registro
-                newCli = []
-                cliente = [var.ui.txtdni, var.ui.txtAlta, var.ui.txtApe, var.ui.txtNome, var.ui.txtDir]  # para la BD
-                tabCli = []  # para la tableView
-                client = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
-                # código para cargar la tabla
-                for i in cliente:
-                    newCli.append(i.text())
-                for i in client:
-                    tabCli.append(i.text())
-                newCli.append(var.ui.cmbProv.currentText())
-                newCli.append(var.ui.cmbMuni.currentText())
-                if var.ui.rbtHome.isChecked:
-                    newCli.append("Hombre")
-                elif var.ui.rbtMujer.isChecked:
-                    newCli.append("Mujer")
-                pagos = []
-                if var.ui.chkCargoCuenta.isChecked():
-                    pagos.append('Cargo cuenta')
-                if var.ui.chkTrans.isChecked():
-                    pagos.append('Transferencia')
-                if var.ui.chkEfectivo.isChecked():
-                    pagos.append('Efectivo')
-                if var.ui.chkTarjeta.isChecked():
-                    pagos.append('Tarjeta')
-                pagos = set(pagos)  # evita duplicados
-                tabCli.append(', '.join(pagos))
-                newCli.append(', '.join(pagos))
-                newCli.append(var.ui.spinEnvio.value())
-                # cargamos la tabla
+            # Preparamos el registro
+            newCli = []
+            cliente = [var.ui.txtdni, var.ui.txtAlta, var.ui.txtApe, var.ui.txtNome, var.ui.txtDir]  # para la BD
+            tabCli = []  # para la tableView
+            client = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
+            # código para cargar la tabla
+            for i in cliente:
+                newCli.append(i.text())
+            for i in client:
+                tabCli.append(i.text())
+            newCli.append(var.ui.cmbProv.currentText())
+            newCli.append(var.ui.cmbMuni.currentText())
+            if var.ui.rbtHome.isChecked:
+                newCli.append("Hombre")
+            elif var.ui.rbtMujer.isChecked:
+                newCli.append("Mujer")
+            pagos = []
+            if var.ui.chkCargoCuenta.isChecked():
+                pagos.append('Cargo cuenta')
+            if var.ui.chkTrans.isChecked():
+                pagos.append('Transferencia')
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+            pagos = set(pagos)  # evita duplicados
+            tabCli.append(', '.join(pagos))
+            newCli.append(', '.join(pagos))
+            newCli.append(var.ui.spinEnvio.value())
+
+            # cargamos la tabla
+            if dnivalido:
                 row = 0
                 column = 0
                 var.ui.tabCliente.insertRow(row)
@@ -199,7 +200,6 @@ class Clientes():
                     var.ui.tabCliente.setItem(row, column, cell)
                     column += 1
                 conexion.Conexion.altaCli(newCli)
-
             else:
                 # print('DNI no válido')
                 msgBox = QMessageBox()

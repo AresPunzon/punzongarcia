@@ -79,6 +79,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnReportArticulos.clicked.connect(informes.Informes.ListadoArticulo)
         var.ui.btnReportCli.clicked.connect(events.Eventos.Imprimir)
         var.ui.btnLimpiaFormProd.clicked.connect(products.Productos.limpiaFormProd)
+        var.ui.btnImprimirFactura.clicked.connect(informes.Informes.factura)
+        var.ui.btnLimpiaFormFacturas.clicked.connect(facturas.Facturas.limpiarFacturas)
         '''
         Eventos de la barra de menús
         '''
@@ -113,7 +115,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFacturas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         # facturas.Facturas.preparaLineaVenta(self)
-        facturas.Facturas.cargarLineaVenta(self)
+        facturas.Facturas.cargarLineaVenta(0)
         '''
         Base de datos
         '''
