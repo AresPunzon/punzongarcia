@@ -239,6 +239,13 @@ class Informes:
                     var.cv.drawString(i + 350, j, str(cantidad))
                     var.cv.drawString(i + 440, j, str(total))
                     j = j - 20
+                var.cv.setFont('Helvetica', size=8)
+                subTotal = var.ui.lblSubTotal.text()
+                iva = var.ui.lblIva.text()
+                final = var.ui.lblTotal.text()
+                var.cv.drawString(i + 410, j - 20, "Sub Total: " + subTotal)
+                var.cv.drawString(i + 410, j - 40, "IVA: " + iva)
+                var.cv.drawString(i + 410, j - 60, "Total: " + final)
 
             var.cv.save()
             cont = 0

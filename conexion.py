@@ -604,9 +604,9 @@ class Conexion:
             facturas.Facturas.cargarLineaVenta(index)
             iva = suma * 0.21
             total = suma + iva
-            var.ui.lblSubTotal.setText(str(round(suma,2)) + '€')
-            var.ui.lblIva.setText(str(round(iva, 2)) + '€')
-            var.ui.lblTotal.setText(str(round(total, 2)) + '€')
+            var.ui.lblSubTotal.setText(str('{:.2f}'.format(round(suma,2))) + '€')
+            var.ui.lblIva.setText(str('{:.2f}'.format(round(iva, 2))) + '€')
+            var.ui.lblTotal.setText(str('{:.2f}'.format(round(total, 2))) + '€')
 
         except Exception as error:
             print('error cargar las líneas de venta', error)
