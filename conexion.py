@@ -404,7 +404,6 @@ class Conexion:
                 while query.next():
                     registro.append(query.value(0))
                     registro.append(query.value(1))
-                print(registro)
                 return registro
 
         except Exception as error:
@@ -509,11 +508,14 @@ class Conexion:
             query = QtSql.QSqlQuery()
             query.prepare('delete from facturas where codigo = :codigo')
             query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
-            if query.exec_():
+            query2 = QtSql.QSqlQuery()
+            query2.prepare('delete from ventas where codventa = :codventa')
+            query.bindValue(':codventa', str(var.ui.lblNumFactura.text()))
+            if query.exec_() and query2.exec():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText('Factura eliminada')
+                msg.setText('Factura y ventas asociadas eliminadas')
                 msg.exec()
             Conexion.cargaTabFacturas(self)
 
@@ -625,16 +627,18 @@ class Conexion:
 
     def borrarVenta(self):
         try:
+            row = var.ui.tabVentas.selectedItems()
+            codVenta = row[0].text()
             query = QtSql.QSqlQuery()
-            query.prepare('delete from ventas where codigo = :codigo')
-            #query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
+            query.prepare('delete from ventas where codventa = :codventa')
+            query.bindValue(':codventa', int(codVenta))
             if query.exec_():
+                facturas.Facturas.cargaFac(self)
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
                 msg.setText('Venta eliminada')
                 msg.exec()
-            facturas.Facturas.cargaFac(self)
 
         except Exception as error:
             print('Error al borrar una venta ', error)

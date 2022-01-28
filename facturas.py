@@ -100,15 +100,16 @@ class Facturas():
 
     def procesoVenta(self):
         try:
-            articulo = var.cmbproducto.currentText()
-            dato = conexion.Conexion.obtenerPrecio(articulo)
-            row = var.ui.tabVentas.currentRow()
-            var.precio = dato[1]
-            precioEu = format_currency(dato[1], 'EUR', locale='de_DE')
-            var.codpro = dato[0]
-            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precioEu)))
-            #var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
-            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+            if (var.cmbproducto.currentText() != ''):
+                articulo = var.cmbproducto.currentText()
+                dato = conexion.Conexion.obtenerPrecio(articulo)
+                row = var.ui.tabVentas.currentRow()
+                var.precio = dato[1]
+                precioEu = format_currency(dato[1], 'EUR', locale='de_DE')
+                var.codpro = dato[0]
+                var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(precioEu)))
+                #var.ui.tabVentas.setItem(row, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+                var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
 
         except Exception as error:
             print('Error al procesar una venta ', error)
@@ -126,7 +127,6 @@ class Facturas():
             venta.append(int(var.codpro))
             venta.append((float(var.precio)))
             venta.append(float(cantidad))
-            print(venta)
             conexion.Conexion.cargarVenta(venta)
 
         except Exception as error:

@@ -81,6 +81,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiaFormProd.clicked.connect(products.Productos.limpiaFormProd)
         var.ui.btnImprimirFactura.clicked.connect(informes.Informes.factura)
         var.ui.btnLimpiaFormFacturas.clicked.connect(facturas.Facturas.limpiarFacturas)
+        var.ui.btnBorrarVenta.clicked.connect(conexion.Conexion.borrarVenta)
         '''
         Eventos de la barra de menús
         '''
