@@ -505,19 +505,33 @@ class Conexion:
 
     def bajaFac(self):
         try:
-            query = QtSql.QSqlQuery()
-            query.prepare('delete from facturas where codigo = :codigo')
-            query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
-            query2 = QtSql.QSqlQuery()
-            query2.prepare('delete from ventas where codventa = :codventa')
-            query.bindValue(':codventa', str(var.ui.lblNumFactura.text()))
-            if query.exec_() and query2.exec():
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Question)
+            msg.setText('Va a eliminar la factura con código ' + str(var.ui.lblNumFactura.text())
+                        + '\n¿Está seguro?')
+            msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msg.exec()
+            if msg.clickedButton() == msg.button(msg.StandardButton.Yes):
+                query = QtSql.QSqlQuery()
+                query.prepare('delete from facturas where codigo = :codigo')
+                query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
+                query2 = QtSql.QSqlQuery()
+                query2.prepare('delete from ventas where codventa = :codventa')
+                query.bindValue(':codventa', str(var.ui.lblNumFactura.text()))
+                if query.exec_() and query2.exec():
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Information)
+                    msg.setText('Factura y ventas asociadas eliminadas')
+                    msg.exec()
+                Conexion.cargaTabFacturas(self)
+            elif msg.clickedButton() == msg.button(msg.StandardButton.No):
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText('Factura y ventas asociadas eliminadas')
+                msg.setText('Factura NO eliminada')
                 msg.exec()
-            Conexion.cargaTabFacturas(self)
 
         except Exception as error:
             print('Error al dar de baja una factura ', error)

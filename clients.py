@@ -244,6 +244,8 @@ class Clientes():
 
             if fila:
                 row = [dato.text() for dato in fila]
+                var.ui.txtDNIFac.setText(row[0])
+                var.ui.lblNomFac.setText(row[1] + ' ' + row[2])
             print(row)
             for i, dato in enumerate(datos):  # cargamos los datos en las cajas de texto
                 dato.setText(row[i])
@@ -265,9 +267,8 @@ class Clientes():
                 var.ui.rbtHome.setChecked(True)
             elif str(registro[3]) == 'Mujer':
                 var.ui.rbtMujer.setChecked(True)
-            var.ui.spinEnvio.setValue(registro[4])
-            var.ui.txtDNIFac.setText(var.ui.txtdni.text())
-            var.ui.lblNomFac.setText(var.ui.txtAlta.text())
+            var.ui.spinEnvio.setValue(int(registro[4]))
+
 
         except Exception as error:
             print('Error al cargar datos de un cliente ', error)

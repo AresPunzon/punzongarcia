@@ -211,3 +211,36 @@ class Eventos():
                 print('Error en mensaje generado exportar datos ', error)
         except Exception as error:
             print('Error en evento exportar datos ', error)
+
+    def Autor(self):
+        try:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QtWidgets.QMessageBox.Information)
+            msgBox.setText("Ares Punzón García"
+                           "\nNacido el 17/07/2000")
+            msgBox.setWindowTitle("Datos del autor")
+            msgBox.exec()
+        except Exception as error:
+            print('Error en la ventana Autor ', error)
+
+    def Contacto(self):
+        try:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QtWidgets.QMessageBox.Information)
+            msgBox.setText("Correo: arespg@gmail.com"
+                           "\nTeléfono: +34 608 188 870")
+            msgBox.setWindowTitle("Datos de contacto")
+            msgBox.exec()
+        except Exception as error:
+            print('Error en la ventana Autor ', error)
+
+    def Version(self):
+        try:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QtWidgets.QMessageBox.Information)
+            msgBox.setText("Programa todavía en fase Beta"
+                           "\nVersión: 0.7.4")
+            msgBox.setWindowTitle("Datos del autor")
+            msgBox.exec()
+        except Exception as error:
+            print('Error en la ventana Autor ', error)

@@ -31,7 +31,7 @@ class Productos():
     def guardaProd(self):
         try:
             registro = []
-            producto = var.ui.txtProducto.text()
+            producto = var.ui.txtProd.text()
             producto = producto.title()
             registro.append(producto)
             precio = var.ui.txtPrecio.text()
@@ -39,7 +39,7 @@ class Productos():
             precio = locale.currency(float(precio))
             registro.append(precio)
             conexion.Conexion.altaProd(registro)
-            conexion.Conexion.cargarTabPro(self)
+            conexion.Conexion.cargarTabProd(self)
 
         except Exception as error:
             print('Error en alta productos: ', error)
