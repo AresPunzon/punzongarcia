@@ -243,9 +243,9 @@ class Informes:
                 subTotal = var.ui.lblSubTotal.text()
                 iva = var.ui.lblIva.text()
                 final = var.ui.lblTotal.text()
-                var.cv.drawString(i + 410, j - 20, "Sub Total: " + subTotal)
-                var.cv.drawString(i + 410, j - 40, "IVA: " + iva)
-                var.cv.drawString(i + 410, j - 60, "Total: " + final)
+                var.cv.drawRightString(i + 469, j - 20, "Sub Total: " + subTotal)
+                var.cv.drawRightString(i + 469, j - 40, "IVA: " + iva)
+                var.cv.drawRightString(i + 469, j - 60, "Total: " + final)
 
             var.cv.save()
             cont = 0

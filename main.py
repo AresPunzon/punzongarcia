@@ -11,6 +11,19 @@ from datetime import *
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
+'''
+Meter esto en ventana.py
+import img.backup
+import img.bin
+import img.calendario
+import img.carpeta
+import img.cerrar
+import img.imprimir
+import img.invoid
+import img.limpiar
+import img.ojo
+import img.restore
+'''
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):

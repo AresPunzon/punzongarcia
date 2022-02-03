@@ -621,6 +621,7 @@ class Conexion:
             var.ui.lblSubTotal.setText(str('{:.2f}'.format(round(suma,2))) + '€')
             var.ui.lblIva.setText(str('{:.2f}'.format(round(iva, 2))) + '€')
             var.ui.lblTotal.setText(str('{:.2f}'.format(round(total, 2))) + '€')
+            var.ui.tabVentas.scrollToBottom()
 
         except Exception as error:
             print('error cargar las líneas de venta', error)

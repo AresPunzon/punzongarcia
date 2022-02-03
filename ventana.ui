@@ -252,12 +252,15 @@ align: center;
         </item>
         <item>
          <widget class="QPushButton" name="btnLimpiaForm">
+          <property name="toolTip">
+           <string>Limpiar campos</string>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/reload.png</normaloff>img/reload.png</iconset>
+           <iconset resource="img/limpiar.qrc">
+            <normaloff>:/newPrefix/reload.png</normaloff>:/newPrefix/reload.png</iconset>
           </property>
          </widget>
         </item>
@@ -301,12 +304,15 @@ align: center;
         </item>
         <item>
          <widget class="QPushButton" name="btnCalendar">
+          <property name="toolTip">
+           <string>Seleccionar fecha</string>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/calendario.png</normaloff>img/calendario.png</iconset>
+           <iconset resource="img/calendario.qrc">
+            <normaloff>:/newPrefix/calendario.png</normaloff>:/newPrefix/calendario.png</iconset>
           </property>
          </widget>
         </item>
@@ -681,12 +687,15 @@ align: center;
         <height>32</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Imprimir lista clientes</string>
+      </property>
       <property name="text">
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/print.png</normaloff>img/print.png</iconset>
+       <iconset resource="img/imprimir.qrc">
+        <normaloff>:/newPrefix/print.png</normaloff>:/newPrefix/print.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -710,12 +719,15 @@ align: center;
         <height>32</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>PDF lista clientes</string>
+      </property>
       <property name="text">
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/ojo.png</normaloff>img/ojo.png</iconset>
+       <iconset resource="img/ojo.qrc">
+        <normaloff>:/newPrefix/ojo.png</normaloff>:/newPrefix/ojo.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -767,6 +779,9 @@ align: center;
        </item>
        <item>
         <widget class="QPushButton" name="btnBuscaCliFac">
+         <property name="toolTip">
+          <string>Buscar cliente por DNI</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -822,12 +837,15 @@ align: center;
        </item>
        <item>
         <widget class="QPushButton" name="btnFechaFac">
+         <property name="toolTip">
+          <string>Seleccionar fecha</string>
+         </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>img/calendario.png</normaloff>img/calendario.png</iconset>
+          <iconset resource="img/calendario.qrc">
+           <normaloff>:/newPrefix/calendario.png</normaloff>:/newPrefix/calendario.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1052,12 +1070,15 @@ align: center;
         <height>32</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Imprimir factura</string>
+      </property>
       <property name="text">
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/print.png</normaloff>img/print.png</iconset>
+       <iconset resource="img/imprimir.qrc">
+        <normaloff>:/newPrefix/print.png</normaloff>:/newPrefix/print.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1228,7 +1249,7 @@ align: center;
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -1242,19 +1263,29 @@ align: center;
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
           <widget class="QPushButton" name="btnFacturar">
+           <property name="toolTip">
+            <string>Crear factura</string>
+           </property>
            <property name="text">
-            <string>Facturar</string>
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="img/invoid.qrc">
+             <normaloff>:/newPrefix/innvoid.png</normaloff>:/newPrefix/innvoid.png</iconset>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btnLimpiaFormFacturas">
+           <property name="toolTip">
+            <string>Limpiar campos</string>
+           </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>img/reload.png</normaloff>img/reload.png</iconset>
+            <iconset resource="img/limpiar.qrc">
+             <normaloff>:/newPrefix/reload.png</normaloff>:/newPrefix/reload.png</iconset>
            </property>
           </widget>
          </item>
@@ -1275,12 +1306,15 @@ align: center;
        </item>
        <item>
         <widget class="QPushButton" name="btnBorrarVenta">
+         <property name="toolTip">
+          <string>Eliminar venta</string>
+         </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>img/bin.png</normaloff>img/bin.png</iconset>
+          <iconset resource="img/bin.qrc">
+           <normaloff>:/newPrefix/bin.png</normaloff>:/newPrefix/bin.png</iconset>
          </property>
         </widget>
        </item>
@@ -1297,7 +1331,7 @@ align: center;
         <x>20</x>
         <y>100</y>
         <width>671</width>
-        <height>151</height>
+        <height>421</height>
        </rect>
       </property>
       <column>
@@ -1460,23 +1494,29 @@ align: center;
       <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
         <widget class="QPushButton" name="btnReportArticulos">
+         <property name="toolTip">
+          <string>PDF lista de artículos</string>
+         </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>img/ojo.png</normaloff>img/ojo.png</iconset>
+          <iconset resource="img/ojo.qrc">
+           <normaloff>:/newPrefix/ojo.png</normaloff>:/newPrefix/ojo.png</iconset>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btnLimpiaFormProd">
+         <property name="toolTip">
+          <string>Limpiar campos</string>
+         </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>img/reload.png</normaloff>img/reload.png</iconset>
+          <iconset resource="img/limpiar.qrc">
+           <normaloff>:/newPrefix/reload.png</normaloff>:/newPrefix/reload.png</iconset>
          </property>
         </widget>
        </item>
@@ -1543,6 +1583,10 @@ align: center;
     <property name="title">
      <string>Acerca de</string>
     </property>
+    <addaction name="actionAutor"/>
+    <addaction name="actionContacto"/>
+    <addaction name="separator"/>
+    <addaction name="actionVersion"/>
    </widget>
    <addaction name="menuarchivo"/>
    <addaction name="menuHerramientas"/>
@@ -1603,8 +1647,8 @@ align: center;
   </action>
   <action name="actionvarSalir">
    <property name="icon">
-    <iconset>
-     <normaloff>img/salir.png</normaloff>img/salir.png</iconset>
+    <iconset resource="img/cerrar.qrc">
+     <normaloff>:/newPrefix/salir.png</normaloff>:/newPrefix/salir.png</iconset>
    </property>
    <property name="text">
     <string>varSalir</string>
@@ -1612,8 +1656,8 @@ align: center;
   </action>
   <action name="actionvarOpen">
    <property name="icon">
-    <iconset>
-     <normaloff>img/open.png</normaloff>img/open.png</iconset>
+    <iconset resource="img/carpeta.qrc">
+     <normaloff>:/newPrefix/open.png</normaloff>:/newPrefix/open.png</iconset>
    </property>
    <property name="text">
     <string>varOpen</string>
@@ -1621,8 +1665,8 @@ align: center;
   </action>
   <action name="actionvarBackup">
    <property name="icon">
-    <iconset>
-     <normaloff>img/backup.png</normaloff>img/backup.png</iconset>
+    <iconset resource="img/backup.qrc">
+     <normaloff>:/newPrefix/backup.png</normaloff>:/newPrefix/backup.png</iconset>
    </property>
    <property name="text">
     <string>varBackup</string>
@@ -1630,8 +1674,8 @@ align: center;
   </action>
   <action name="actionvarBackupRestaurar">
    <property name="icon">
-    <iconset>
-     <normaloff>img/backup_restore.png</normaloff>img/backup_restore.png</iconset>
+    <iconset resource="img/restore.qrc">
+     <normaloff>:/newPrefix/backup_restore.png</normaloff>:/newPrefix/backup_restore.png</iconset>
    </property>
    <property name="text">
     <string>varBackupSalir</string>
@@ -1639,8 +1683,8 @@ align: center;
   </action>
   <action name="actionvarImprimir">
    <property name="icon">
-    <iconset>
-     <normaloff>img/print.png</normaloff>img/print.png</iconset>
+    <iconset resource="img/imprimir.qrc">
+     <normaloff>:/newPrefix/print.png</normaloff>:/newPrefix/print.png</iconset>
    </property>
    <property name="text">
     <string>varImprimir</string>
@@ -1675,8 +1719,34 @@ align: center;
     <string>Listado clientes</string>
    </property>
   </action>
+  <action name="actionAutor">
+   <property name="text">
+    <string>Autor</string>
+   </property>
+  </action>
+  <action name="actionContacto">
+   <property name="text">
+    <string>Contacto</string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="text">
+    <string>Versión</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/limpiar.qrc"/>
+  <include location="img/carpeta.qrc"/>
+  <include location="img/cerrar.qrc"/>
+  <include location="img/restore.qrc"/>
+  <include location="img/backup.qrc"/>
+  <include location="img/bin.qrc"/>
+  <include location="img/invoid.qrc"/>
+  <include location="img/ojo.qrc"/>
+  <include location="img/imprimir.qrc"/>
+  <include location="img/calendario.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
   <buttongroup name="rbtGroupSex"/>
