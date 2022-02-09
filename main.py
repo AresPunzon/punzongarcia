@@ -8,7 +8,6 @@ from ventana import *
 from windowCal import *
 import sys, var, events, conexion, clients, locale
 from datetime import *
-
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
 '''
@@ -70,6 +69,7 @@ class Main(QtWidgets.QMainWindow):
         super(Main, self).__init__()
         var.ui = Ui_MainWindow()
         var.ui.setupUi(self)
+        conexion.Conexion.create_db(var.filedb)
         '''
         Eventos de botón
         '''

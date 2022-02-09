@@ -1,17 +1,63 @@
+import sqlite3
 from datetime import datetime
 
 import self as self
 import xlwt as xlwt
 from PyQt5 import QtSql, QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QMessageBox
+from ventana import *
 
-import conexion
 import facturas
-import var
 import locale
-locale.setlocale( locale.LC_ALL, '' )
+import var, os, shutil
+
+locale.setlocale(locale.LC_ALL, '')
+
 
 class Conexion:
+    def create_db(filename):
+        try:
+            con = sqlite3.connect(database=filename)
+            cur = con.cursor()
+            cur.execute(
+                'CREATE TABLE if not exists clientes (dni	TEXT NOT NULL, alta	TEXT, apellidos	TEXT, nombre TEXT, direccion TEXT, '
+                'provincia	TEXT, municipio	NUMERIC, sexo	TEXT, pago	TEXT, envio	INTEGER, PRIMARY KEY(dni))')
+
+            cur.execute("CREATE TABLE if not exists facturas (codigo	INTEGER NOT NULL, dni	TEXT NOT NULL, fechafac	TEXT NOT NULL, "
+                        "PRIMARY KEY(codigo AUTOINCREMENT), FOREIGN KEY(dni) REFERENCES clientes(dni) on delete cascade)")
+
+            cur.execute("CREATE TABLE if not exists municipios (provincia_id	INTEGER NOT NULL, municipio	TEXT NOT NULL, "
+                        "id	INTEGER NOT NULL, PRIMARY KEY(id))")
+
+            cur.execute("CREATE TABLE if not exists productos (codigo	INTEGER NOT NULL, nombre	TEXT, "
+                        "precio	NUMERIC, PRIMARY KEY(codigo AUTOINCREMENT))")
+
+            cur.execute("CREATE TABLE if not exists provincias (id INTEGER NOT NULL, provincia	TEXT NOT NULL UNIQUE, PRIMARY KEY(id))")
+
+            cur.execute("CREATE TABLE if not exists sqlite_sequence(name, seq)")
+
+            cur.execute("CREATE TABLE if not exists ventas (codventa	INTEGER NOT NULL, codfac INTEGER NOT NULL, codprod	INTEGER NOT NULL, "
+                        "cantidad REAL, precio	REAL NOT NULL, FOREIGN KEY(codfac) REFERENCES facturas(codigo), "
+                        "FOREIGN KEY(codprod) REFERENCES productos(codigo), PRIMARY KEY(codventa AUTOINCREMENT))")
+
+            con.commit()
+            con.close()
+
+            #Creación de directorios
+            if not os.path.exists('.\\informes'):
+                os.mkdir('.\\informes')
+            if not os.path.exists('.\\img'):
+                os.mkdir('.\\img')
+            if not os.path.exists('.\\copias'):
+                os.mkdir('.\\copias')
+
+        except Exception as error:
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Warning)
+            msg.setText(str(error))
+            msg.exec()
+
     def db_connect(filedb):
         try:
             db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
@@ -231,7 +277,7 @@ class Conexion:
             query.prepare(
                 'insert into productos (nombre, precio)'
                 'VALUES (:nombre, :precio)')
-            #query.bindValue(':codigo', str(newProd[0]))
+            # query.bindValue(':codigo', str(newProd[0]))
             query.bindValue(':nombre', str(newProd[0]))
             query.bindValue(':precio', str(newProd[1]))
 
@@ -299,7 +345,7 @@ class Conexion:
                     var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(producto))
                     var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
-                    #from PyQt5.uic.properties import QtCore
+                    # from PyQt5.uic.properties import QtCore
                     var.ui.tabProd.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
                     var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
@@ -343,7 +389,7 @@ class Conexion:
             modpro[2] = float(modpro[2])
             modpro[2] = round(modpro[2], 2)
             modpro[2] = str(modpro[2])
-            #modpro[2] = locale.currency(float(modpro[2]))
+            # modpro[2] = locale.currency(float(modpro[2]))
             query.bindValue(':precio', str(modpro[2]))
 
             if query.exec_():
@@ -394,12 +440,13 @@ class Conexion:
     '''
     Gestión facturas
     '''
+
     def buscaCliFac(dni):
         try:
             registro = []
             query = QtSql.QSqlQuery()
             query.prepare('select apellidos, nombre from clientes where dni = :dni')
-            query.bindValue(':dni', str(dni) )
+            query.bindValue(':dni', str(dni))
             if query.exec_():
                 while query.next():
                     registro.append(query.value(0))
@@ -469,7 +516,7 @@ class Conexion:
                     lay_out.setContentsMargins(0, 0, 0, 0)
                     lay_out.addWidget(var.btnfacdel)
                     var.btnfacdel.clicked.connect(Conexion.bajaFac)
-                    #lay_out.setAlignment(QtCore.Qt.AlignVCenter)
+                    # lay_out.setAlignment(QtCore.Qt.AlignVCenter)
                     var.ui.tabFacturas.setCellWidget(index, 2, cell_widget)
                     var.ui.tabFacturas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     var.ui.tabFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
@@ -517,8 +564,8 @@ class Conexion:
                 query.prepare('delete from facturas where codigo = :codigo')
                 query.bindValue(':codigo', str(var.ui.lblNumFactura.text()))
                 query2 = QtSql.QSqlQuery()
-                query2.prepare('delete from ventas where codventa = :codventa')
-                query.bindValue(':codventa', str(var.ui.lblNumFactura.text()))
+                query2.prepare('delete from ventas where codfac = :codfac')
+                query2.bindValue(':codfac', str(var.ui.lblNumFactura.text()))
                 if query.exec_() and query2.exec():
                     msg = QtWidgets.QMessageBox()
                     msg.setWindowTitle('Aviso')
@@ -536,11 +583,11 @@ class Conexion:
         except Exception as error:
             print('Error al dar de baja una factura ', error)
 
-    def cargarCmbProducto(self = None):
+    def cargarCmbProducto(self=None):
         try:
             var.cmbproducto.clear()
             query = QtSql.QSqlQuery()
-            var.cmbproducto.addItem('') #primera línea en blanco
+            var.cmbproducto.addItem('')  # primera línea en blanco
             query.prepare('select nombre from productos order by nombre')
             if query.exec_():
                 while query.next():
@@ -587,7 +634,7 @@ class Conexion:
     def cargarLineasVenta(codfac):
         try:
             suma = 0.0
-            #facturas.Facturas.cargarLineaVenta(0)
+            # facturas.Facturas.cargarLineaVenta(0)
             var.ui.tabVentas.clearContents()
             index = 0
             query = QtSql.QSqlQuery()
@@ -604,7 +651,7 @@ class Conexion:
 
                     suma = suma + (float(precio) * float(cantidad))
                     var.ui.tabVentas.setRowCount(index + 1)
-                    var.ui.tabVentas.setItem(index,0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
                     var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(producto)))
                     var.ui.tabVentas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
@@ -612,13 +659,14 @@ class Conexion:
                     var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
                     var.ui.tabVentas.setItem(index, 3, QtWidgets.QTableWidgetItem(str(cantidad)))
                     var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
-                    var.ui.tabVentas.setItem(index, 4, QtWidgets.QTableWidgetItem(str(float(precio) * float(cantidad))+ '€'))
+                    var.ui.tabVentas.setItem(index, 4,
+                                             QtWidgets.QTableWidgetItem(str(float(precio) * float(cantidad)) + '€'))
                     var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignRight)
                     index = index + 1
             facturas.Facturas.cargarLineaVenta(index)
             iva = suma * 0.21
             total = suma + iva
-            var.ui.lblSubTotal.setText(str('{:.2f}'.format(round(suma,2))) + '€')
+            var.ui.lblSubTotal.setText(str('{:.2f}'.format(round(suma, 2))) + '€')
             var.ui.lblIva.setText(str('{:.2f}'.format(round(iva, 2))) + '€')
             var.ui.lblTotal.setText(str('{:.2f}'.format(round(total, 2))) + '€')
             var.ui.tabVentas.scrollToBottom()
@@ -657,29 +705,3 @@ class Conexion:
 
         except Exception as error:
             print('Error al borrar una venta ', error)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
