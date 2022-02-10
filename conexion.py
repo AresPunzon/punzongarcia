@@ -1,3 +1,4 @@
+import csv
 import sqlite3
 from datetime import datetime
 
@@ -22,25 +23,41 @@ class Conexion:
             cur.execute(
                 'CREATE TABLE if not exists clientes (dni	TEXT NOT NULL, alta	TEXT, apellidos	TEXT, nombre TEXT, direccion TEXT, '
                 'provincia	TEXT, municipio	NUMERIC, sexo	TEXT, pago	TEXT, envio	INTEGER, PRIMARY KEY(dni))')
+            con.commit()
 
             cur.execute("CREATE TABLE if not exists facturas (codigo	INTEGER NOT NULL, dni	TEXT NOT NULL, fechafac	TEXT NOT NULL, "
                         "PRIMARY KEY(codigo AUTOINCREMENT), FOREIGN KEY(dni) REFERENCES clientes(dni) on delete cascade)")
+            con.commit()
 
             cur.execute("CREATE TABLE if not exists municipios (provincia_id	INTEGER NOT NULL, municipio	TEXT NOT NULL, "
                         "id	INTEGER NOT NULL, PRIMARY KEY(id))")
+            con.commit()
 
             cur.execute("CREATE TABLE if not exists productos (codigo	INTEGER NOT NULL, nombre	TEXT, "
-                        "precio	NUMERIC, PRIMARY KEY(codigo AUTOINCREMENT))")
+                        "precio	NUMERIC, PRIMARY KEY(codigo))")
+            con.commit()
 
             cur.execute("CREATE TABLE if not exists provincias (id INTEGER NOT NULL, provincia	TEXT NOT NULL UNIQUE, PRIMARY KEY(id))")
-
-            cur.execute("CREATE TABLE if not exists sqlite_sequence(name, seq)")
-
-            cur.execute("CREATE TABLE if not exists ventas (codventa	INTEGER NOT NULL, codfac INTEGER NOT NULL, codprod	INTEGER NOT NULL, "
-                        "cantidad REAL, precio	REAL NOT NULL, FOREIGN KEY(codfac) REFERENCES facturas(codigo), "
-                        "FOREIGN KEY(codprod) REFERENCES productos(codigo), PRIMARY KEY(codventa AUTOINCREMENT))")
-
             con.commit()
+
+            cur.execute("CREATE TABLE if not exists ventas (codventa INTEGER NOT NULL, codfac INTEGER NOT NULL, codprod	INTEGER NOT NULL, "
+                        "cantidad REAL, precio	REAL NOT NULL, FOREIGN KEY(codfac) REFERENCES facturas(codigo), "
+                        "FOREIGN KEY(codprod) REFERENCES productos(codigo), PRIMARY KEY (codventa AUTOINCREMENT))")
+            con.commit()
+
+            cur.execute('select count() from provincias')
+            numero = cur.fetchone()[0]
+            con.commit()
+
+
+            # ¿Q pone aquí?
+            if int(numero) == 0:
+                print()
+                with open('provincias.csv', 'r', encoding="utf-8") as fin:
+                    dr = csv.DictReader(fin)
+                    to_db = [(i['id'], i['provincia']) for i in dr]
+                cur.executemany('insert into provincias (id, provincia) VALUES (?,?);', to_db)
+                con.commit()
             con.close()
 
             #Creación de directorios
