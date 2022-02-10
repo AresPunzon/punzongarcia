@@ -20,6 +20,12 @@ from zipfile import ZipFile
 
 class Eventos():
     def Salida(self):
+        """
+
+        Método que muestra la ventana para salir del programa y en función de lo que se quiera hacer,
+        cierra la aplicación o esconde la ventana de salir.
+
+        """
         try:
             var.dlgaviso.show()
             if var.dlgaviso.exec():
@@ -30,6 +36,11 @@ class Eventos():
             print('Error en módulo salir ', error)
 
     def abrirCal(self):
+        """
+
+        Método que muestra la ventana de calendario
+
+        """
         try:
             var.dlgCalendar.show()
         except Exception as error:
@@ -37,6 +48,11 @@ class Eventos():
 
 
     def resizeTablaCli(self):
+        """
+
+        Método que ajusta el tamaño de las columnas de la tbla clientes de la interfaz
+
+        """
         try:
             header = var.ui.tabCliente.horizontalHeader()
             for i in range(5):
@@ -47,6 +63,11 @@ class Eventos():
             print('Error al redimensionar la tabla de clientes ', error)
 
     def resizeTablaFacturas(self):
+        """
+
+        Método que ajusta el tamaño de las columnas de la tbla facturas de la interfaz
+
+        """
         try:
             header = var.ui.tabFacturas.horizontalHeader()
             for i in range(3):
@@ -57,6 +78,11 @@ class Eventos():
             print('Error al redimensionar la tabla de facturas', error)
 
     def resizeTablaArticulos(self):
+        """
+
+        Método que ajusta el tamaño de las columnas de la tbla artículos de la interfaz
+
+        """
         try:
             header = var.ui.tabProd.horizontalHeader()
             for i in range(3):
@@ -67,6 +93,11 @@ class Eventos():
             print('Error al redimensionar la tabla de artículos ', error)
 
     def resizeTablaVentas(self):
+        """
+
+        Método que ajusta el tamaño de las columnas de la tbla ventas de la interfaz
+
+        """
         try:
             header = var.ui.tabVentas.horizontalHeader()
             for i in range(5):
@@ -77,12 +108,22 @@ class Eventos():
             print('Error al redimensionar la tabla de ventas ', error)
 
     def Abrir(self):
+        """
+
+        Método que abre la ventana del explorador de archivos.
+
+        """
         try:
             var.dlgabrir.show()
         except Exception as error:
             print('Error al abrir cuadro diálogo ', error)
 
     def Backup(self):
+        """
+
+        Método que realiza una copia de seguridad de la BD en formato zip
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
@@ -107,6 +148,11 @@ class Eventos():
             print('Error al hacer backup ', error)
 
     def Restaurar(self):
+        """
+
+        Método que restaura la BD a partir de una copia de seguridad en formato zip
+
+        """
         try:
             dirpro = os.getcwd()
             print(dirpro)
@@ -126,6 +172,11 @@ class Eventos():
             print('Error al restaurar la base de datos ', error)
 
     def Imprimir(self):
+        """
+
+        Método que abre la ventana de impresión para conectarte con impresoras
+
+        """
         try:
             printDialog = QtPrintSupport.QPrintDialog()
             if printDialog.exec_():
@@ -134,6 +185,12 @@ class Eventos():
             print('Error al imprimir ', error)
 
     def ImportarDatos(self):
+        """
+
+        Método que actualiza/crea clientes a partir de un fichero excel y llama al método cargarTabCli
+        para que recarge la tabla clientes de la interfaz
+
+        """
         try:
             dirpro = os.getcwd()
             print(dirpro)
@@ -198,6 +255,11 @@ class Eventos():
             print('Error al cargar datos del excel ', error)
 
     def ExportarDatos(self):
+        """
+
+        Método que crea un fichero excel con los datos de todos los clientes
+
+        """
         try:
             conexion.Conexion.exportExcel(self)
             try:
@@ -213,6 +275,11 @@ class Eventos():
             print('Error en evento exportar datos ', error)
 
     def Autor(self):
+        """
+
+        Método que establece un autor para los informes
+
+        """
         try:
             msgBox = QMessageBox()
             msgBox.setIcon(QtWidgets.QMessageBox.Information)
@@ -224,6 +291,11 @@ class Eventos():
             print('Error en la ventana Autor ', error)
 
     def Contacto(self):
+        """
+
+        Método que establece un contacto para los informes
+
+        """
         try:
             msgBox = QMessageBox()
             msgBox.setIcon(QtWidgets.QMessageBox.Information)
@@ -235,6 +307,11 @@ class Eventos():
             print('Error en la ventana Autor ', error)
 
     def Version(self):
+        """
+
+        Método que establece una versión del programa para los informes
+
+        """
         try:
             msgBox = QMessageBox()
             msgBox.setIcon(QtWidgets.QMessageBox.Information)

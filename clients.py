@@ -7,6 +7,11 @@ import var
 
 class Clientes():
     def validarDNI():
+        """
+
+        Módulo que valida el DNI de un cliente
+
+        """
         try:
             global dnivalido
             dnivalido = False
@@ -73,6 +78,11 @@ class Clientes():
     '''
 
     def cargaProv(self):
+        """
+
+        Módulo que llama al método de conexión para cargar las provincias en el comboBox de la interfaz
+
+        """
         try:
             var.ui.cmbProv.clear()
             prov = conexion.Conexion.cargaProvCon(self)
@@ -98,6 +108,11 @@ class Clientes():
     #         print('Error en el módulo cargar municipio, ', error)
 
     def cargaMuni(self):
+        """
+
+        Módulo que llama a su correspondiente método en conexion para cargar los municipios en función de la provincia
+
+        """
         try:
             var.ui.cmbMuni.clear()
             mun = conexion.Conexion.cargaMuniCon(self)
@@ -113,6 +128,11 @@ class Clientes():
     #         print('Error en el módulo seleccionar municipio, ', error)
 
     def cargarFecha(qDate):
+        """
+
+        Módulo que da formato a la fecha y la cargar en el LineEdit de la interfaz
+
+        """
         try:
             data = (str(qDate.day()).zfill(0)+ '/'+ str(qDate.month()).zfill(0) + '/' + str(qDate.year()))
             #data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
@@ -125,6 +145,11 @@ class Clientes():
             print('Error cargar fecha en txtFecha', error)
 
     def mayuscNome():
+        """
+
+        Módulo que pone en mayúsculas la inicial del nombre de un cliente
+
+        """
         try:
             nome = var.ui.txtNome.text()
             var.ui.txtNome.setText(nome.capitalize())  # capitalize pone en mayus la primera letra de la primera palabra
@@ -132,6 +157,11 @@ class Clientes():
             print('Error al escribir el nombre ', error)
 
     def mayuscApe():
+        """
+
+        Módulo que pone en mayúsculas las iniciales de los apellidos de un cliente
+
+        """
         try:
             ape = var.ui.txtApe.text()
             var.ui.txtApe.setText(ape.title())  # title pone en mayusc la primera de cada palabra
@@ -139,6 +169,11 @@ class Clientes():
             print('Error al escribir los apellidos ', error)
 
     def mayuscDir():
+        """
+
+        Módulo que pone en mayúsculas las iniciales de la dirección de un cliente
+
+        """
         try:
             dir = var.ui.txtDir.text()
             var.ui.txtDir.setText(dir.title())
@@ -146,6 +181,11 @@ class Clientes():
             print('Error al escribir la dirección ', error)
 
     def envio(self):
+        """
+
+        Módulo que asigna un texto u otro al label al lado del spinbox dependiendo del número
+
+        """
         try:
             if var.ui.spinEnvio.value() == 0:
                 var.ui.lblEnvio.setText('Recogida por cliente')
@@ -159,6 +199,12 @@ class Clientes():
             print('Error en modulo envío', error)
 
     def guardaCli(self):
+        """
+
+        Módulo que recoge los datos de un cliente para cargarlos en la tabla de la interfaz
+        y mandárselos a su correspondiente método en conexion para guardarlo en la BD
+
+        """
         try:
             # Preparamos el registro
             newCli = []
@@ -212,6 +258,11 @@ class Clientes():
             print('Error al guardar clientes ', error)
 
     def limpiarForm(self):
+        """
+
+        Módulo que deja en blanco los campos de datos de un cliente
+
+        """
         try:
             var.ui.txtdni.setText("")
             var.ui.txtApe.setText("")
@@ -238,6 +289,12 @@ class Clientes():
             print('Error al limpiar el formulario ', error)
 
     def cargaCli(self):
+        """
+
+        Módulo que seleccionando un cliente de la tabla de la interfaz, lo carga en la parte superior
+        rellenando los campos correspondientes. Para esto llama al método oneClie de conexion.
+
+        """
         try:
             fila = var.ui.tabCliente.selectedItems()
             datos = [var.ui.txtdni, var.ui.txtApe, var.ui.txtNome, var.ui.txtAlta]
@@ -274,6 +331,12 @@ class Clientes():
             print('Error al cargar datos de un cliente ', error)
 
     def modifCli(self):
+        """
+
+        Método que recoge las modificaciones hechas a un cliente para mandárselas a cargarTabCli en conexión,
+        para que este lo guarde en la BD. Y llama a cargarTabCli para recargar la tabla de clientes de la interfaz.
+
+        """
         try:
             modcliente = []
             cliente = [var.ui.txtdni, var.ui.txtAlta, var.ui.txtApe, var.ui.txtNome, var.ui.txtDir]
@@ -304,6 +367,12 @@ class Clientes():
             print('Error al modificar un cliente ', error)
 
     def bajaCli(self):
+        """
+
+        Método que envía el DNI de un cliente a bajaCli en conexion para que lo elimine,
+        y llama a cargarTabCli para recargar la tabla de clientes de la interfaz.
+
+        """
         try:
             dni = var.ui.txtdni.text()
             conexion.Conexion.bajaCli(dni)

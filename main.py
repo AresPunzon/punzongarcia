@@ -11,6 +11,7 @@ from datetime import *
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
 '''
+
 Meter esto en ventana.py
 import img.backup
 import img.bin
@@ -22,12 +23,15 @@ import img.invoid
 import img.limpiar
 import img.ojo
 import img.restore
+
 '''
 
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         '''
+
         clase calendario
+
         '''
         super(DialogCalendar, self).__init__()
         var.dlgCalendar = Ui_windowCal()
@@ -41,10 +45,12 @@ class DialogCalendar(QtWidgets.QDialog):
 
 class DialogAviso(QtWidgets.QDialog):
     '''
+
     si da error añadir esto en aviso.py
 
     self.btnboxaviso.accepted.connect(aviso.accept)
     self.btnboxaviso.rejected.connect(aviso.reject)
+
     '''
 
     def __init__(self):
@@ -59,7 +65,9 @@ class DialogAviso(QtWidgets.QDialog):
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         '''
+
         ventana abrir explorador windows
+
         '''
         super(FileDialogAbrir, self).__init__()
 
@@ -71,7 +79,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         conexion.Conexion.create_db(var.filedb)
         '''
+        
         Eventos de botón
+        
         '''
         # var.ui.btnsalir.clicked.connect(events.Eventos.Salida)
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.setSexo)
@@ -96,7 +106,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnLimpiaFormFacturas.clicked.connect(facturas.Facturas.limpiarFacturas)
         var.ui.btnBorrarVenta.clicked.connect(conexion.Conexion.borrarVenta)
         '''
+        
         Eventos de la barra de menús
+        
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salida)
         var.ui.actionAbrir.triggered.connect(events.Eventos.Abrir)
@@ -109,7 +121,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionContacto.triggered.connect(events.Eventos.Contacto)
         var.ui.actionVersion.triggered.connect(events.Eventos.Version)
         '''
+        
         Eventos caja de texto
+        
         '''
         var.ui.txtdni.editingFinished.connect(clients.Clientes.validarDNI)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayuscNome)
@@ -118,7 +132,9 @@ class Main(QtWidgets.QMainWindow):
         var.txtCantidad = QtWidgets.QLineEdit()
         var.txtCantidad.editingFinished.connect(facturas.Facturas.totalLineaVenta)
         '''
+        
         Eventos QTwidget
+        
         '''
         events.Eventos.resizeTablaCli(self)
         events.Eventos.resizeTablaArticulos(self)
@@ -134,14 +150,18 @@ class Main(QtWidgets.QMainWindow):
         # facturas.Facturas.preparaLineaVenta(self)
         facturas.Facturas.cargarLineaVenta(0)
         '''
+        
         Base de datos
+        
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTabCli(self)
         conexion.Conexion.cargarTabProd(self)
         conexion.Conexion.cargaTabFacturas(self)
         '''
+        
         Eventos de comboBox
+        
         '''
         clients.Clientes.cargaProv(self)
         # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)
@@ -150,17 +170,23 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargarCmbProducto(self)
         var.cmbproducto.currentIndexChanged.connect(facturas.Facturas.procesoVenta)
         '''
+        
         spinbox
+        
         '''
         var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
         ''' 
+        
         barra de estado
+        
         '''
         var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
         day = datetime.now()
         var.ui.lblFecha.setText(day.strftime('%A, %d del %B de %Y'))
         '''
+        
         Eventos menú herramientas
+        
         '''
         var.ui.actionvarSalir.triggered.connect(events.Eventos.Salida)
         var.ui.actionvarOpen.triggered.connect(events.Eventos.Abrir)

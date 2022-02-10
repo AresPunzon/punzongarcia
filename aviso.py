@@ -12,6 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_aviso(object):
+    '''
+
+    Código obtenido del fichero aviso.ui generado con QtDesigner.
+    Contiene la interfaz gráfica de aviso
+
+    '''
     def setupUi(self, aviso):
         aviso.setObjectName("aviso")
         aviso.setWindowModality(QtCore.Qt.NonModal)

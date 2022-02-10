@@ -7,6 +7,11 @@ import conexion
 class Informes:
 
     def ListadoCliente(self):
+        """
+
+        Método que genera un pdf con todos los clientes
+
+        """
         try:
             var.cv = canvas.Canvas('informes/listadoclientes.pdf')
             Informes.cabecera(self)
@@ -72,6 +77,11 @@ class Informes:
             print('Error al hacer el informe ', error)
 
     def cabecera(self):
+        """
+
+        Método que da formato a la cabecera de los informes
+
+        """
         try:
             logo = '.\\img\linux.png'
             var.cv.line(40,800,530,800)
@@ -89,6 +99,11 @@ class Informes:
             print('Error al hacer la cabecera del informe ', error)
 
     def pie(texto):
+        """
+
+        Método que da formato al pie de los informes
+
+        """
         try:
             var.cv.line(50, 50, 530, 50)
             fecha = datetime.today()
@@ -102,6 +117,11 @@ class Informes:
             print('Error al creación pie del informe ', error)
 
     def ListadoArticulo(self):
+        """
+
+        Método que genera un pdf con todos los artículos
+
+        """
         try:
             var.cv = canvas.Canvas('informes/listadoproductos.pdf')
             Informes.cabecera(self)
@@ -155,49 +175,12 @@ class Informes:
         except Exception as error:
             print('Error al hacer el informe ', error)
 
-    # def Factura(self):
-    #     try:
-    #         var.cv = canvas.Canvas('informes/factura.pdf')
-    #         var.cv.setTitle('Facturas')
-    #         var.cv.setAuthor('Departamento de Alimentación')
-    #         rootPath = '.\\informes'
-    #         var.cv.setFont('Helvetica-Bold', size = 10)
-    #         textoTitulo = 'FACTURA'
-    #         Informes.cabecera(self)
-    #         codfac = var.ui.lblNumFactura.text
-    #         Informes.pie(textoTitulo)
-    #         var.cv.drawString(255, 690, textoTitulo + ':' + str(codfac))
-    #         var.cv.line(40, 685, 530, 685)
-    #         items = ['Venta', 'Artículos', 'Precio/kg', 'Cantidad', 'Total']
-    #         var.cv.drawString(60, 675, items[0])
-    #         var.cv.drawString(150, 675, items[1])
-    #         var.cv.drawString(250, 675, items[2])
-    #         var.cv.drawString(350, 675, items[3])
-    #         var.cv.drawString(450, 675, items[4])
-    #         var.cv.line(40, 670, 530, 670)
-    #         suma = 0.0
-    #         query = QtSql.QSqlQuery()
-    #         query.prepare('select codventa, precio, cantidad, codprod from ventas where codfac = :codfac')
-    #         query.bindValue(':codfac', int(codfac))
-    #         if query.exec_():
-    #             while query.next():
-    #                 codventa = str(query.value(0))
-    #                 precio = str(query.value(1)) + '€'
-    #                 cantidad = str(query.value(2))
-    #                 prod = str(query.value(3))
-    #                 suma = str(suma + (float(precio) * float(cantidad)))
-    #
-    #         var.cv.save()
-    #         cont = 0
-    #         for file in os.listdir(rootPath):
-    #             if file.endswith('factura.pdf'):
-    #                 os.startfile("%s/%s" % (rootPath, file))
-    #             cont = cont + 1
-    #
-    #     except Exception as error:
-    #         print('Error al hacer el factura ', error)
-
     def factura(self):
+        """
+
+        Método que genera un pdf con todas las facturas
+
+        """
         try:
             var.cv = canvas.Canvas('informes/factura.pdf')
             var.cv.setTitle('Factura')
@@ -208,7 +191,30 @@ class Informes:
             Informes.cabecera(self)
             Informes.pie(textotitulo)
             codfac = var.ui.lblNumFactura.text()
+
+            #Añadir datos del cliente
+            #falta algo
+            var.cv.setFont('Helvetica-Bold', size=12)
+            var.cv.drawString(250, 785, 'Datos Cliente')
+            var.cv.setFont('Helvetica', size=8)
+            query = QtSql.QSqlQuery()
+            query.prepare('select direccion, municipio, provincia from clientes where dni = :dni')
+            query.bindValue(':dni', str(var.ui.txtDNIFac.text()))
+            if query.exec_():
+                dir = []
+                while query.next():
+                    dir.append((query.value(0)))
+                    dir.append((query.value(1)))
+                    dir.append((query.value(2)))
+            var.cv.drawString(250, 770, 'CIF: ' + var.ui.txtDNIFac.text())
+            var.cv.drawString(250, 760, 'Cliente: ' + var.ui.lblNomFac.text())
+            var.cv.drawString(250, 750, 'Dirección: ' + str(dir[0]))
+            var.cv.drawString(250, 740, 'Localidad: ' + str(dir[1]))
+            var.cv.drawString(250, 730, 'Provincia: ' + str(dir[2]))
+
+            var.cv.setFont('Helvetica-Bold', size=12)
             var.cv.drawString(255, 690, textotitulo + ': ' + str(codfac))
+            var.cv.setFont('Helvetica', size=8)
             var.cv.line(40, 685, 530, 685)
             items = ['Venta', 'Artículo', 'Precio', 'Cantidad', 'Total']
             var.cv.drawString(60, 675, items[0])

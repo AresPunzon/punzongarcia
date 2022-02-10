@@ -10,6 +10,11 @@ locale.setlocale( locale.LC_ALL, '' )
 
 class Facturas():
     def buscaCli(self):
+        """
+
+        Módulo que se ejecuta con el botón busca. Devuelve datos del cliente para el panel facturación
+
+        """
         try:
             dni = var.ui.txtDNIFac.text().upper()
             var.ui.txtDNIFac.setText(dni)
@@ -31,6 +36,12 @@ class Facturas():
             print("Error al buscar cliente en las facturas ", error)
 
     def altaFac(self):
+        """
+
+        Módulo que a partir de DNI da de alta una factura con su número y fecha. Recarga la tabla facturas y muestra en el label
+        el número de la factura general
+
+        """
         try:
             registro = []
             dni = var.ui.txtDNIFac.text().upper()
@@ -48,6 +59,12 @@ class Facturas():
             print("Error alta en facturas ", error)
 
     def cargaFac(self):
+        """
+
+        Módulo que al elegir una factura de la tabla facturas, carga sus datos en el panel de facturación. Los datos son:
+        dni, fecha factura y nombre
+
+        """
         try:
             fila = var.ui.tabFacturas.selectedItems()
             datos = [var.ui.lblNumFactura, var.ui.txtFechaFac]
@@ -67,22 +84,14 @@ class Facturas():
         except Exception as error:
             print('Error al cargar datos de una factura ', error)
 
-    # def cargarLineaVenta(self):
-    #     try:
-    #         index = 0
-    #         var.cmbproducto = QtWidgets.QComboBox()
-    #         #var.txtCantidad = QtWidgets.QLineEdit()
-    #         #conexion.Conexion.cargarCmbProducto()
-    #         var.cmbproducto.setFixedSize(150, 25)
-    #         var.txtCantidad.setFixedSize(60, 25)
-    #         var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
-    #         var.ui.tabVentas.setRowCount(index + 1)
-    #         var.ui.tabVentas.setCellWidget(index, 1, var.cmbproducto)
-    #         var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
-    #     except Exception as error:
-    #         print('Error al cargar linea venta ', error)
-
     def cargarLineaVenta(index):
+        """
+
+        Método que carga una línea de venta en la fila de la tabla indicada por index
+        :return: última línea de la tabla que carga las ventas de una factura
+        :rtype: int
+
+        """
         try:
             var.cmbproducto = QtWidgets.QComboBox()
             var.cmbproducto.currentIndexChanged.connect(Facturas.procesoVenta)
@@ -99,6 +108,11 @@ class Facturas():
             print('Error al cargar linea venta ', error)
 
     def procesoVenta(self):
+        """
+
+        Módulo que carga el precio del artículo al seleccionarlo en el combo de artículos
+
+        """
         try:
             if (var.cmbproducto.currentText() != ''):
                 articulo = var.cmbproducto.currentText()
@@ -115,6 +129,12 @@ class Facturas():
             print('Error al procesar una venta ', error)
 
     def totalLineaVenta(self = None):
+        """
+
+        Módulo que al anotar la cantidad de producto, indica el total del precio de la venta realizada.
+        Al mismo tiempo, recarga la tabla de líneas de venta, incluyendo las anteriores y la realizada
+
+        """
         try:
             venta = []
             row = var.ui.tabVentas.currentRow()
@@ -133,6 +153,11 @@ class Facturas():
             print('Error al procesar el total de una venta ', error)
 
     def limpiarFacturas(self):
+        """
+
+        Método que pone en blanco los campos de factura
+
+        """
         try:
             var.ui.txtDNIFac.setText("")
             var.ui.lblNumFactura.setText("")

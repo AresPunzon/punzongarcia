@@ -12,6 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_windowCal(object):
+    '''
+
+    Código obtenido del fichero windowCal.ui generado con QtDesigner.
+    Contiene la interfaz gráfica del calendario
+
+    '''
     def setupUi(self, windowCal):
         windowCal.setObjectName("windowCal")
         windowCal.resize(311, 183)
