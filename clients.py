@@ -6,6 +6,7 @@ import var
 
 
 class Clientes():
+    #Pasarle dni al módulo para los tests
     def validarDNI():
         """
 
@@ -15,6 +16,7 @@ class Clientes():
         try:
             global dnivalido
             dnivalido = False
+            #Comentar las 2 líneas de abajo para los tests
             dni = var.ui.txtdni.text()
             var.ui.txtdni.setText(dni.upper())
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'  # letras dni
@@ -27,6 +29,7 @@ class Clientes():
                 dni = dni[:8]
                 if dni[0] in dig_ext:
                     dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
+            #Comentar desde aquí hasta antes del return para los tests
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
                     var.ui.lblvalidodni.setStyleSheet('QLabel {color: green;}')
                     var.ui.lblvalidodni.setText('V')
@@ -40,6 +43,8 @@ class Clientes():
                 var.ui.lblvalidodni.setStyleSheet('QLabel {color: red;}')
                 var.ui.lblvalidodni.setText('X')
                 var.ui.txtdni.setStyleSheet('background-color: pink;')
+            #Descomentar return para los tests
+            #return dni
         except Exception as error:
             print('Error en módulo validar DNI', error)
 

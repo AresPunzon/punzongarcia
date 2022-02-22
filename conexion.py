@@ -98,7 +98,7 @@ class Conexion:
                                                QtWidgets.QMessageBox.Cancel)
                 return False
             else:
-                print("Conexión establecida")
+                #print("Conexión establecida")
                 return True
         except Exception as error:
             print('Problemas en la conexión', error)

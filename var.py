@@ -13,6 +13,9 @@ global cmbproducto
 global txtCantidad
 global precio
 global codpro
+global subfac
+global iva
+global fac
 
 '''
 Otras variables
