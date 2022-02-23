@@ -215,48 +215,6 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error al hacer el informe &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
 
-    <span class="c1"># def Factura(self):</span>
-    <span class="c1">#     try:</span>
-    <span class="c1">#         var.cv = canvas.Canvas(&#39;informes/factura.pdf&#39;)</span>
-    <span class="c1">#         var.cv.setTitle(&#39;Facturas&#39;)</span>
-    <span class="c1">#         var.cv.setAuthor(&#39;Departamento de Alimentación&#39;)</span>
-    <span class="c1">#         rootPath = &#39;.\\informes&#39;</span>
-    <span class="c1">#         var.cv.setFont(&#39;Helvetica-Bold&#39;, size = 10)</span>
-    <span class="c1">#         textoTitulo = &#39;FACTURA&#39;</span>
-    <span class="c1">#         Informes.cabecera(self)</span>
-    <span class="c1">#         codfac = var.ui.lblNumFactura.text</span>
-    <span class="c1">#         Informes.pie(textoTitulo)</span>
-    <span class="c1">#         var.cv.drawString(255, 690, textoTitulo + &#39;:&#39; + str(codfac))</span>
-    <span class="c1">#         var.cv.line(40, 685, 530, 685)</span>
-    <span class="c1">#         items = [&#39;Venta&#39;, &#39;Artículos&#39;, &#39;Precio/kg&#39;, &#39;Cantidad&#39;, &#39;Total&#39;]</span>
-    <span class="c1">#         var.cv.drawString(60, 675, items[0])</span>
-    <span class="c1">#         var.cv.drawString(150, 675, items[1])</span>
-    <span class="c1">#         var.cv.drawString(250, 675, items[2])</span>
-    <span class="c1">#         var.cv.drawString(350, 675, items[3])</span>
-    <span class="c1">#         var.cv.drawString(450, 675, items[4])</span>
-    <span class="c1">#         var.cv.line(40, 670, 530, 670)</span>
-    <span class="c1">#         suma = 0.0</span>
-    <span class="c1">#         query = QtSql.QSqlQuery()</span>
-    <span class="c1">#         query.prepare(&#39;select codventa, precio, cantidad, codprod from ventas where codfac = :codfac&#39;)</span>
-    <span class="c1">#         query.bindValue(&#39;:codfac&#39;, int(codfac))</span>
-    <span class="c1">#         if query.exec_():</span>
-    <span class="c1">#             while query.next():</span>
-    <span class="c1">#                 codventa = str(query.value(0))</span>
-    <span class="c1">#                 precio = str(query.value(1)) + &#39;€&#39;</span>
-    <span class="c1">#                 cantidad = str(query.value(2))</span>
-    <span class="c1">#                 prod = str(query.value(3))</span>
-    <span class="c1">#                 suma = str(suma + (float(precio) * float(cantidad)))</span>
-    <span class="c1">#</span>
-    <span class="c1">#         var.cv.save()</span>
-    <span class="c1">#         cont = 0</span>
-    <span class="c1">#         for file in os.listdir(rootPath):</span>
-    <span class="c1">#             if file.endswith(&#39;factura.pdf&#39;):</span>
-    <span class="c1">#                 os.startfile(&quot;%s/%s&quot; % (rootPath, file))</span>
-    <span class="c1">#             cont = cont + 1</span>
-    <span class="c1">#</span>
-    <span class="c1">#     except Exception as error:</span>
-    <span class="c1">#         print(&#39;Error al hacer el factura &#39;, error)</span>
-
 <div class="viewcode-block" id="Informes.factura"><a class="viewcode-back" href="../src/informes.html#informes.Informes.factura">[docs]</a>    <span class="k">def</span> <span class="nf">factura</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -273,7 +231,30 @@
             <span class="n">Informes</span><span class="o">.</span><span class="n">cabecera</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="n">Informes</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">textotitulo</span><span class="p">)</span>
             <span class="n">codfac</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNumFactura</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+            <span class="c1">#Añadir datos del cliente</span>
+            <span class="c1">#falta algo</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s1">&#39;Helvetica-Bold&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">785</span><span class="p">,</span> <span class="s1">&#39;Datos Cliente&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select direccion, municipio, provincia from clientes where dni = :dni&#39;</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:dni&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDNIFac</span><span class="o">.</span><span class="n">text</span><span class="p">()))</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="nb">dir</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                    <span class="nb">dir</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+                    <span class="nb">dir</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+                    <span class="nb">dir</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">770</span><span class="p">,</span> <span class="s1">&#39;CIF: &#39;</span> <span class="o">+</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDNIFac</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">760</span><span class="p">,</span> <span class="s1">&#39;Cliente: &#39;</span> <span class="o">+</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNomFac</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="s1">&#39;Dirección: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="s1">&#39;Localidad: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">730</span><span class="p">,</span> <span class="s1">&#39;Provincia: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">dir</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s1">&#39;Helvetica-Bold&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
             <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">690</span><span class="p">,</span> <span class="n">textotitulo</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">codfac</span><span class="p">))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
             <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">685</span><span class="p">,</span> <span class="mi">530</span><span class="p">,</span> <span class="mi">685</span><span class="p">)</span>
             <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Venta&#39;</span><span class="p">,</span> <span class="s1">&#39;Artículo&#39;</span><span class="p">,</span> <span class="s1">&#39;Precio&#39;</span><span class="p">,</span> <span class="s1">&#39;Cantidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Total&#39;</span><span class="p">]</span>
             <span class="n">var</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">drawString</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">675</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>

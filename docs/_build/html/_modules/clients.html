@@ -46,6 +46,7 @@
 
 
 <div class="viewcode-block" id="Clientes"><a class="viewcode-back" href="../src/clients.html#clients.Clientes">[docs]</a><span class="k">class</span> <span class="nc">Clientes</span><span class="p">():</span>
+    <span class="c1">#Pasarle dni al módulo para los tests</span>
 <div class="viewcode-block" id="Clientes.validarDNI"><a class="viewcode-back" href="../src/clients.html#clients.Clientes.validarDNI">[docs]</a>    <span class="k">def</span> <span class="nf">validarDNI</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -55,6 +56,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">global</span> <span class="n">dnivalido</span>
             <span class="n">dnivalido</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1">#Comentar las 2 líneas de abajo para los tests</span>
             <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtdni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtdni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
             <span class="n">tabla</span> <span class="o">=</span> <span class="s1">&#39;TRWAGMYFPDXBNJZSQVHLCKE&#39;</span>  <span class="c1"># letras dni</span>
@@ -67,6 +69,7 @@
                 <span class="n">dni</span> <span class="o">=</span> <span class="n">dni</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">dig_ext</span><span class="p">:</span>
                     <span class="n">dni</span> <span class="o">=</span> <span class="n">dni</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reemp_dig_ext</span><span class="p">[</span><span class="n">dni</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="c1">#Comentar desde aquí hasta antes del return para los tests</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">dni</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numeros</span><span class="p">])</span> <span class="ow">and</span> <span class="n">tabla</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span> <span class="o">%</span> <span class="mi">23</span><span class="p">]</span> <span class="o">==</span> <span class="n">dig_control</span><span class="p">:</span>
                     <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblvalidodni</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color: green;}&#39;</span><span class="p">)</span>
                     <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblvalidodni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
@@ -80,6 +83,8 @@
                 <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblvalidodni</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color: red;}&#39;</span><span class="p">)</span>
                 <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblvalidodni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
                 <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtdni</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;background-color: pink;&#39;</span><span class="p">)</span>
+            <span class="c1">#Descomentar return para los tests</span>
+            <span class="c1">#return dni</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en módulo validar DNI&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
 

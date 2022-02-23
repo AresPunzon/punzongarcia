@@ -56,13 +56,22 @@ class Conexion:
             numero = cur.fetchone()[0]
             con.commit()
 
-            # ¿Q pone aquí?
             if int(numero) == 0:
                 print()
                 with open('provincias.csv', 'r', encoding="utf-8") as fin:
                     dr = csv.DictReader(fin)
                     to_db = [(i['id'], i['provincia']) for i in dr]
                 cur.executemany('insert into provincias (id, provincia) VALUES (?,?);', to_db)
+                con.commit()
+
+            cur.execute('select count() from municipios')
+            numero2 = cur.fetchone()[0]
+            if int(numero2) == 0:
+                print()
+                with open('municipios.csv', 'r', encoding="utf-8") as fin:
+                    dr = csv.DictReader(fin)
+                    to_db = [(i['provincia_id'], i['municipio'], i['id']) for i in dr]
+                cur.executemany('insert into municipios (provincia_id, municipio, id) VALUES (?,?,?);', to_db)
                 con.commit()
             con.close()
 
