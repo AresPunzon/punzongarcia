@@ -17,8 +17,8 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(value, msg)
 
     def test_fac(self):
-        valor = 53.12
-        codfac = 3
+        valor = 27.83
+        codfac = 25
         try:
             msg = 'Cálculos incorrectos'
             var.subfac = 0.00
