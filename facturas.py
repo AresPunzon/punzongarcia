@@ -1,3 +1,5 @@
+import re
+
 import none as none
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
@@ -139,6 +141,9 @@ class Facturas():
             venta = []
             row = var.ui.tabVentas.currentRow()
             cantidad = round(float(var.txtCantidad.text().replace(",", ".")), 2)
+            # valor = var.precio.replace(",",".")
+            # val = valor[:-2]
+            # print(val)
             totalLinea = round(float(var.precio) * float(cantidad), 2)
             var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(totalLinea) + '€'))
             var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)

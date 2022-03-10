@@ -43,7 +43,7 @@ class Productos():
             registro.append(producto)
             precio = var.ui.txtPrecio.text()
             precio = precio.replace(',', '.')  # necesita estar con punto como en américa
-            precio = locale.currency(float(precio))
+            #precio = locale.currency(float(precio))
             registro.append(precio)
             conexion.Conexion.altaProd(registro)
             conexion.Conexion.cargarTabProd(self)

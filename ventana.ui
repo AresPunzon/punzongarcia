@@ -60,7 +60,7 @@ align: center;
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -84,7 +84,7 @@ align: center;
        <rect>
         <x>20</x>
         <y>20</y>
-        <width>631</width>
+        <width>811</width>
         <height>211</height>
        </rect>
       </property>
@@ -102,7 +102,7 @@ align: center;
         <rect>
          <x>19</x>
          <y>179</y>
-         <width>581</width>
+         <width>781</width>
          <height>22</height>
         </rect>
        </property>
@@ -323,7 +323,7 @@ align: center;
         <rect>
          <x>20</x>
          <y>50</y>
-         <width>611</width>
+         <width>771</width>
          <height>22</height>
         </rect>
        </property>
@@ -362,6 +362,22 @@ align: center;
            </font>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QLabel" name="lblNome">
@@ -405,7 +421,7 @@ align: center;
         <rect>
          <x>20</x>
          <y>80</y>
-         <width>371</width>
+         <width>771</width>
          <height>22</height>
         </rect>
        </property>
@@ -440,7 +456,7 @@ align: center;
         <rect>
          <x>20</x>
          <y>110</y>
-         <width>431</width>
+         <width>541</width>
          <height>22</height>
         </rect>
        </property>
@@ -498,7 +514,7 @@ align: center;
         <rect>
          <x>20</x>
          <y>150</y>
-         <width>581</width>
+         <width>781</width>
          <height>22</height>
         </rect>
        </property>
@@ -642,7 +658,7 @@ align: center;
        <rect>
         <x>10</x>
         <y>300</y>
-        <width>691</width>
+        <width>821</width>
         <height>211</height>
        </rect>
       </property>
@@ -1330,7 +1346,7 @@ align: center;
        <rect>
         <x>20</x>
         <y>100</y>
-        <width>671</width>
+        <width>811</width>
         <height>421</height>
        </rect>
       </property>
@@ -1355,7 +1371,7 @@ align: center;
        <rect>
         <x>21</x>
         <y>11</y>
-        <width>259</width>
+        <width>351</width>
         <height>74</height>
        </rect>
       </property>
@@ -1417,8 +1433,8 @@ align: center;
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>50</y>
+        <x>430</x>
+        <y>60</y>
         <width>273</width>
         <height>26</height>
        </rect>
@@ -1450,8 +1466,8 @@ align: center;
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>10</y>
+        <x>430</x>
+        <y>20</y>
         <width>401</width>
         <height>25</height>
        </rect>
@@ -1485,8 +1501,8 @@ align: center;
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>570</x>
-        <y>50</y>
+        <x>710</x>
+        <y>60</y>
         <width>64</width>
         <height>26</height>
        </rect>

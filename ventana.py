@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 import img.backup
 import img.bin
 import img.calendario
@@ -19,7 +20,6 @@ import img.invoid
 import img.limpiar
 import img.ojo
 import img.restore
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -55,14 +55,14 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.groupBox = QtWidgets.QGroupBox(self.tab)
-        self.groupBox.setGeometry(QtCore.QRect(20, 20, 631, 211))
+        self.groupBox.setGeometry(QtCore.QRect(20, 20, 811, 211))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.groupBox.setFont(font)
         self.groupBox.setObjectName("groupBox")
         self.layoutWidget = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget.setGeometry(QtCore.QRect(19, 179, 581, 22))
+        self.layoutWidget.setGeometry(QtCore.QRect(19, 179, 781, 22))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -189,7 +189,7 @@ class Ui_MainWindow(object):
         self.btnCalendar.setObjectName("btnCalendar")
         self.horizontalLayout_4.addWidget(self.btnCalendar)
         self.layoutWidget3 = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget3.setGeometry(QtCore.QRect(20, 50, 611, 22))
+        self.layoutWidget3.setGeometry(QtCore.QRect(20, 50, 771, 22))
         self.layoutWidget3.setObjectName("layoutWidget3")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.layoutWidget3)
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -218,6 +218,8 @@ class Ui_MainWindow(object):
         self.txtApe.setFont(font)
         self.txtApe.setObjectName("txtApe")
         self.horizontalLayout_5.addWidget(self.txtApe)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem)
         self.lblNome = QtWidgets.QLabel(self.layoutWidget3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -243,7 +245,7 @@ class Ui_MainWindow(object):
         self.txtNome.setObjectName("txtNome")
         self.horizontalLayout_5.addWidget(self.txtNome)
         self.layoutWidget4 = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget4.setGeometry(QtCore.QRect(20, 80, 371, 22))
+        self.layoutWidget4.setGeometry(QtCore.QRect(20, 80, 771, 22))
         self.layoutWidget4.setObjectName("layoutWidget4")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.layoutWidget4)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -263,7 +265,7 @@ class Ui_MainWindow(object):
         self.txtDir.setObjectName("txtDir")
         self.horizontalLayout_6.addWidget(self.txtDir)
         self.layoutWidget5 = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget5.setGeometry(QtCore.QRect(20, 110, 431, 22))
+        self.layoutWidget5.setGeometry(QtCore.QRect(20, 110, 541, 22))
         self.layoutWidget5.setObjectName("layoutWidget5")
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.layoutWidget5)
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -299,7 +301,7 @@ class Ui_MainWindow(object):
         self.cmbMuni.setObjectName("cmbMuni")
         self.horizontalLayout_7.addWidget(self.cmbMuni)
         self.layoutWidget6 = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget6.setGeometry(QtCore.QRect(20, 150, 581, 22))
+        self.layoutWidget6.setGeometry(QtCore.QRect(20, 150, 781, 22))
         self.layoutWidget6.setObjectName("layoutWidget6")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.layoutWidget6)
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
@@ -327,8 +329,8 @@ class Ui_MainWindow(object):
         self.rbtHome.setObjectName("rbtHome")
         self.rbtGroupSex.addButton(self.rbtHome)
         self.horizontalLayout_8.addWidget(self.rbtHome)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem1)
         self.lblSpin = QtWidgets.QLabel(self.layoutWidget6)
         self.lblSpin.setObjectName("lblSpin")
         self.horizontalLayout_8.addWidget(self.lblSpin)
@@ -361,7 +363,7 @@ class Ui_MainWindow(object):
         self.btnBaja.setObjectName("btnBaja")
         self.horizontalLayout_2.addWidget(self.btnBaja)
         self.tabCliente = QtWidgets.QTableWidget(self.tab)
-        self.tabCliente.setGeometry(QtCore.QRect(10, 300, 691, 211))
+        self.tabCliente.setGeometry(QtCore.QRect(10, 300, 821, 211))
         self.tabCliente.setObjectName("tabCliente")
         self.tabCliente.setColumnCount(5)
         self.tabCliente.setRowCount(0)
@@ -630,8 +632,8 @@ class Ui_MainWindow(object):
         self.btnLimpiaFormFacturas.setObjectName("btnLimpiaFormFacturas")
         self.horizontalLayout_17.addWidget(self.btnLimpiaFormFacturas)
         self.horizontalLayout_18.addLayout(self.horizontalLayout_17)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_18.addItem(spacerItem1)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem2)
         self.btnBorrarVenta = QtWidgets.QPushButton(self.layoutWidget12)
         self.btnBorrarVenta.setText("")
         icon6 = QtGui.QIcon()
@@ -643,7 +645,7 @@ class Ui_MainWindow(object):
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
         self.tabProd = QtWidgets.QTableWidget(self.tab_3)
-        self.tabProd.setGeometry(QtCore.QRect(20, 100, 671, 421))
+        self.tabProd.setGeometry(QtCore.QRect(20, 100, 811, 421))
         self.tabProd.setObjectName("tabProd")
         self.tabProd.setColumnCount(3)
         self.tabProd.setRowCount(0)
@@ -654,7 +656,7 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tabProd.setHorizontalHeaderItem(2, item)
         self.layoutWidget13 = QtWidgets.QWidget(self.tab_3)
-        self.layoutWidget13.setGeometry(QtCore.QRect(21, 11, 259, 74))
+        self.layoutWidget13.setGeometry(QtCore.QRect(21, 11, 351, 74))
         self.layoutWidget13.setObjectName("layoutWidget13")
         self.formLayout = QtWidgets.QFormLayout(self.layoutWidget13)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -691,7 +693,7 @@ class Ui_MainWindow(object):
         self.txtCod.setObjectName("txtCod")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.txtCod)
         self.layoutWidget14 = QtWidgets.QWidget(self.tab_3)
-        self.layoutWidget14.setGeometry(QtCore.QRect(290, 50, 273, 26))
+        self.layoutWidget14.setGeometry(QtCore.QRect(430, 60, 273, 26))
         self.layoutWidget14.setObjectName("layoutWidget14")
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.layoutWidget14)
         self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
@@ -706,7 +708,7 @@ class Ui_MainWindow(object):
         self.btnModProd.setObjectName("btnModProd")
         self.horizontalLayout_9.addWidget(self.btnModProd)
         self.layoutWidget15 = QtWidgets.QWidget(self.tab_3)
-        self.layoutWidget15.setGeometry(QtCore.QRect(290, 10, 401, 25))
+        self.layoutWidget15.setGeometry(QtCore.QRect(430, 20, 401, 25))
         self.layoutWidget15.setObjectName("layoutWidget15")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.layoutWidget15)
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
@@ -725,7 +727,7 @@ class Ui_MainWindow(object):
         self.btnBuscar.setObjectName("btnBuscar")
         self.horizontalLayout_10.addWidget(self.btnBuscar)
         self.layoutWidget16 = QtWidgets.QWidget(self.tab_3)
-        self.layoutWidget16.setGeometry(QtCore.QRect(570, 50, 64, 26))
+        self.layoutWidget16.setGeometry(QtCore.QRect(710, 60, 64, 26))
         self.layoutWidget16.setObjectName("layoutWidget16")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.layoutWidget16)
         self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
@@ -849,7 +851,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionvarBackupRestaurar)
 
         self.retranslateUi(MainWindow)
-        self.tabPrograma.setCurrentIndex(1)
+        self.tabPrograma.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
