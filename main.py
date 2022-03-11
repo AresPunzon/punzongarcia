@@ -23,6 +23,7 @@ import img.invoid
 import img.limpiar
 import img.ojo
 import img.restore
+import img.lupa
 
 '''
 

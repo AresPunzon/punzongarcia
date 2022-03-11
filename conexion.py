@@ -633,7 +633,9 @@ class Conexion:
                     codigo = query.value(0)
                     fechafac = query.value(1)
                     var.btnfacdel = QtWidgets.QPushButton()
-                    icopapelera = QtGui.QPixmap("img/bin.png")
+                    icopapelera = QtGui.QIcon()
+                    icopapelera.addPixmap(QtGui.QPixmap(":/newPrefix/bin.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    #icopapelera = QtGui.QPixmap("img/bin.png")
                     var.btnfacdel.setFixedSize(24, 24)
                     var.btnfacdel.setIcon(QtGui.QIcon(icopapelera))
                     var.ui.tabFacturas.setRowCount(index + 1)  # creamos la fila y luego cargamos datos

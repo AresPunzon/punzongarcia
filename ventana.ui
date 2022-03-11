@@ -802,8 +802,8 @@ align: center;
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>img/lupa.png</normaloff>img/lupa.png</iconset>
+          <iconset resource="img/lupa.qrc">
+           <normaloff>:/newPrefix/lupa.png</normaloff>:/newPrefix/lupa.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1724,7 +1724,7 @@ align: center;
   <action name="actionvarAbrirImprimir">
    <property name="icon">
     <iconset>
-     <normaloff>img/folder.png</normaloff>img/folder.png</iconset>
+     <normaloff>C:/Users/a18arespg/.designer/backup/img/folder.png</normaloff>C:/Users/a18arespg/.designer/backup/img/folder.png</iconset>
    </property>
    <property name="text">
     <string>varAbrirImprimir</string>
@@ -1768,6 +1768,7 @@ align: center;
  </widget>
  <resources>
   <include location="img/limpiar.qrc"/>
+  <include location="img/lupa.qrc"/>
   <include location="img/carpeta.qrc"/>
   <include location="img/cerrar.qrc"/>
   <include location="img/restore.qrc"/>
@@ -1780,11 +1781,11 @@ align: center;
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>
